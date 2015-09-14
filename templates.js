@@ -414,12 +414,67 @@ function(t) {
     }    
     t.run(["$templateCache", function(t) {
         t.put("createActivitySelect.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false">'+
-        '<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title>'+
-        '<ion-content has-header="false" scroll="false">'+
-        '<div class="row">'+
-        	'<div class="col">'+
-        		'<div align="center" style="padding: 20px;font-size: 18px;color: #018E75;">Searching Location...</div>'+
-        		'<div align="center"><table><tr><td class="makephotocls"><button class="make_photo_icon" ng-click="selectphoto_createActivity()"></button></td><td class="makephotocls"><button class="select_photo_icon" ng-click="makephoto_createActivity()" ></button></td></tr><tr><td class="makephotocls">Make Photo</td><td class="makephotocls">Select Photo</td></tr></table></div><div align="center" style="padding: 40px;font-size: 18px;color: #018E75;">Copy one of your Activities</div><div class="row danile_content_width"><div align="center" class="col"><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div></div></ion-content></ion-view>')
+	'<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title>'+
+		'<ion-content has-header="false" scroll="false">'+
+      		'<div class="row">'+
+      '<div class="col">'+
+         '<div align="center" style="padding: 20px;font-size: 18px;color: #018E75;">Searching Location...</div>'+
+         '<div align="center">'+
+            '<table>'+
+              ' <tr>'+
+                  '<td class="makephotocls"><button class="make_photo_icon" ng-click="selectphoto_createActivity()"></button></td>'+
+                  '<td class="makephotocls"><button class="select_photo_icon" ng-click="makephoto_createActivity()" ></button></td>'+
+               '</tr>'+
+               '<tr>'+
+                  '<td class="makephotocls">Make Photo</td>'+
+                 ' <td class="makephotocls">Select Photo</td>'+
+              ' </tr>'+
+            '</table>'+
+        ' </div>'+
+        ' <div align="center" style="padding: 40px;font-size: 18px;color: #018E75;">Copy one of your Activities</div>'+
+        /*' <div class="row danile_content_width">'+
+           ' <div align="center" class="col">'+
+               '<ul>'+
+                 ' <li><img src="../img/join_activity_1.png" alt=""/></li>'+
+                 ' <li><img src="../img/join_activity_2.png" alt=""/></li>'+
+                 ' <li><img src="../img/join_activity_3.png" alt=""/></li>'+
+                 ' <li><img src="../img/join_activity_4.png" alt=""/></li>'+
+                 ' <li><img src="../img/join_activity_5.png" alt=""/></li>'+
+               '</ul>'+
+              
+            '</div>'+
+         '</div>'+*/
+         
+         '<ion-list >'+
+			'<ion-item  >'+
+				'<ion-scroll direction="x">'+
+					'<div class="row">'+
+
+						'<div style="margin-right: 10px;"><img src="../img/add.png" width="100" height="100" /></div>'+
+					
+						'<div style="margin-right: 10px;"><img src="../img/camera_img.png" width="100" height="100" /></div>'+
+					
+						'<div style="margin-right: 10px;"><img src="../img/chat_1.png" width="100" height="100" /></div>'+
+					
+					
+					
+						'<div style="margin-right: 10px;"><img src="../img/fire-small.png" width="100" height="100" /></div>'+
+					
+						'<div style="margin-right: 10px;"><img src="../img/fire.png" width="100" height="100" /></div>'+
+					
+						'<div style="margin-right: 10px;"><img src="../img/head_app_thumbnail.jpg" width="100" height="100" /></div>'+
+					
+						'<div style="margin-right: 10px;"><img src="../img/lisa_chat_icon.png" width="100" height="100" /></div>'+
+					
+				'</div>'+
+
+			'</ion-scroll>'+
+		'</ion-item>'+
+
+'</ion-list>'+
+      '</div>'+
+  ' </ion-content>'+
+'</ion-view>')
     }])
 }(),
 function(t) {
@@ -429,7 +484,7 @@ function(t) {
         t = angular.module("templates", [])
     }    
     t.run(["$templateCache", function(t) {
-        t.put("selectPhoto.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><h2 class="title2">Location Found</h2></div></div></div><div class="row pad"><div class="col pad"><div class="capture_image"><div class="wt_txt" on-swipe-left="onSwipeLeft_createActivity()">What is the Activity.</div></div><div class="row grey_bg"><div class="col"><div align="center" style="margin-bottom: 10px;"><table><tr><td class="makephotocls"><button class="retake_Photo" ng-click="onRetake_Photo_createActivity()"></button></td><td class="makephotocls"><button class="Reselect_Photo " ng-click="onReselect_Photo_createActivity()"></button></td></tr><tr><td class="retakeimage_lbl_cls">Retake Photo</td><td class="retakeimage_lbl_cls">Reselect Photo</td></tr></table></div></div></div></div></div></div></div></ion-content></ion-view>')
+        t.put("selectPhoto.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg" on-swipe-left="onSwipeLeft_createActivity()"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><h2 class="title2">Location Found</h2></div></div></div><div class="row pad"><div class="col pad"><div class="capture_image"><div class="wt_txt" >What is the Activity.</div></div><div class="row grey_bg"><div class="col"><div align="center" style="margin-bottom: 10px;"><table><tr><td class="makephotocls"><button class="retake_Photo" ng-click="onRetake_Photo_createActivity()"></button></td><td class="makephotocls"><button class="Reselect_Photo " ng-click="onReselect_Photo_createActivity()"></button></td></tr><tr><td class="retakeimage_lbl_cls">Retake Photo</td><td class="retakeimage_lbl_cls">Reselect Photo</td></tr></table></div></div></div></div></div></div></div></ion-content></ion-view>')
     }])
 }();
 // Compressed using http://javascript-minifier.com/ 
