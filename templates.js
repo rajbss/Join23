@@ -55,7 +55,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("discovery.html", '<ion-view view-title="{{\'DISCOVERY_TITLE\' | translate}}" cache-view="false"><ion-content><ul class="list"><li class="item item-toggle">{{\'DISCOVERABLE\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.enabled"><div class="track"><div class="handle"></div></div></label></li></ul><div class="item item-divider">{{\'SHOW_ME\' | translate}}:</div><ul class="list"><li class="item item-toggle">{{\'GUYS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.guys"><div class="track"><div class="handle"></div></div></label></li><li class="item item-toggle">{{\'GIRLS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.girls"><div class="track"><div class="handle"></div></div></label></li><li class="item item-divider">{{\'SEARCH_DISTANCE\' | translate}}: {{profile.distance}}{{profile.distanceType}}</li><li class="item" style="height: 60px"><slider floor="1" ceiling="200" ng-model-low="profile.distance" ng-model-high="profile.distance"></slider></li><li class="item item-divider">{{\'AGED_BETWEEN\' | translate}}: {{profile.ageFrom}} to {{profile.ageTo}}</li><li class="item" style="height: 60px"><slider floor="18" ceiling="55" ng-model-low="profile.ageFrom" ng-model-high="profile.ageTo"></slider></li></ul><div style="width:100%;padding-left: 10px;padding-right: 10px;"><button class="button button-block button-positive" ng-click="save()">{{\'SAVE\' | translate}}</button> <button class="button button-block button-light" ng-click="cancel()">{{\'CANCEL\' | translate}}</button></div></ion-content></ion-view>')
+        t.put("discovery.html", '<ion-view ng-init="profile={ageFrom:18,ageTo:30,enabled:true,guys:true,girls:true,autoJoin:true}" view-title="{{\'ACTIVITY_SETTINGS_TITLE\' | translate}}" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>{{\'ACTIVITY_SETTINGS_TITLE\' | translate}}</span></ion-nav-title><ion-content><ul class="list"><li class="item item-toggle">Online ({{\'DISCOVERABLE\' | translate}})<label class="toggle"><input type="checkbox" ng-model="profile.enabled"><div class="track"><div class="handle"></div></div></label></li><li class="item item-toggle">{{\'AUTOMATIC_JOIN\' | translate}}<button class="help_indicator"></button><label class="toggle"><input type="checkbox" ng-model="profile.autoJoin"><div class="track"><div class="handle"></div></div></label></li></ul><div class="item item-divider">{{\'SHOW_ME\' | translate}}:</div><ul class="list"><li class="item item-toggle">{{\'GUYS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.guys"><div class="track"><div class="handle"></div></div></label></li><li class="item item-toggle">{{\'GIRLS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.girls"><div class="track"><div class="handle"></div></div></label></li><li class="item item-divider">{{\'AGED_BETWEEN\' | translate}}: {{profile.ageFrom}} to {{profile.ageTo}}</li><li class="item" style="height: 60px"><slider floor="18" ceiling="55" ng-model-low="profile.ageFrom" ng-model-high="profile.ageTo"></slider></li></ul><div align="center" style="width:100%;padding-left: 10px;padding-right: 10px;"><button class="button save_setting" ng-click="save()">{{\'SAVE\' | translate}}</button> <button class="button button-light" ng-click="cancel()">{{\'CANCEL\' | translate}}</button></div></ion-content></ion-view>')
     }])
 }(),
 function(t) {
@@ -135,7 +135,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("menu.html", '<ion-side-menus enable-menu-with-back-views="false"><ion-side-menu-content><ion-nav-bar class="bar-positive"><ion-nav-back-button></ion-nav-back-button><ion-nav-buttons side="left"><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button></ion-nav-buttons></ion-nav-bar><ion-nav-view name="menuContent"><div class="bar bar-header bar-light app-name"><h1 class="title head_content"></h1></div></ion-nav-view></ion-side-menu-content><ion-side-menu side="left" id="menu-left"><ion-header-bar class="bar-positive"><h1 class="title">title</h1></ion-header-bar><ion-content><ul class="list"><a ui-sref="menu.profile" class="item" menu-close=""><img src="./img/user_icon.png"/>  {{\'ME_AND_MY_ACTIVITIES\' | translate}}</a> <a href="#/menu/discovery" class="item" menu-close=""><img src="./img/run_people.png"/>  {{\'DISCOVER_ACTIVITIES\' | translate}}</a> <a href="#/menu/chats" class="item" menu-close=""><img src="./img/chat_icon.png"/> {{\'MENU_CHAT\' | translate}}</a> <a href="#/menu/home" class="item" menu-close=""><img src="./img/search_icon.png"/> {{\'FIND_ACTIVITIES\' | translate}}</a> <a href="#/menu/createActivity" class="item" menu-close=""><img src="./img/plus_icon.png"/>{{\'CREATE_ACTIVITY\' | translate}}</a> <a href="#/menu/people" class="item" menu-close=""><img src="./img/select_people_icon.png"/> {{\'SELECT_PEOPLE\' | translate}}</a> <a href="#/menu/settings" class="item" menu-close=""><img src="./img/setting_icon.png"/> {{\'MY_PREFERENCES\' | translate}}</a> <a href="#/menu/contact" ng-controller="ShareController as shareCtrl" ng-click="shareCtrl.share()" class="item" menu-close=""><img src="./img/contact_icon.png"/>  {{\'CONTACT_US\' | translate}}</a></ul></ion-content></ion-side-menu></ion-side-menus>')
+        t.put("menu.html", '<ion-side-menus enable-menu-with-back-views="false"><ion-side-menu-content><ion-nav-bar class="bar-positive"><ion-nav-back-button></ion-nav-back-button><ion-nav-buttons side="left"><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button></ion-nav-buttons></ion-nav-bar><ion-nav-view name="menuContent"><div class="bar bar-header bar-light app-name"><h1 class="title head_content"></h1></div></ion-nav-view></ion-side-menu-content><ion-side-menu side="left" id="menu-left"><ion-header-bar class="bar-positive"><h1 class="title">title</h1></ion-header-bar><ion-content><ul class="list"><a ui-sref="menu.profile" class="item" menu-close=""><img src="./img/user_icon.png" class="menuicon"/>  {{\'ME_AND_MY_ACTIVITIES\' | translate}}</a> <a href="#/menu/discovery" class="item" menu-close=""><img src="./img/run_people.png" class="menuicon"/>  {{\'DISCOVER_ACTIVITIES\' | translate}}</a> <a href="#/menu/chats" class="item" menu-close=""><img src="./img/chat_icon.png" class="menuicon"/> {{\'MENU_CHAT\' | translate}}</a> <a href="#/menu/home" class="item" menu-close=""><img src="./img/search_icon.png" class="menuicon"/> {{\'FIND_ACTIVITIES\' | translate}}</a> <a href="#/menu/createActivity" class="item" menu-close=""><img src="./img/plus_icon.png" class="menuicon"/>{{\'CREATE_ACTIVITY\' | translate}}</a> <a href="#/menu/people" class="item" menu-close=""><img src="./img/select_people_icon.png" class="menuicon"/> {{\'SELECT_PEOPLE\' | translate}}</a> <a href="#/menu/settings" class="item" menu-close=""><img src="./img/setting_icon.png" class="menuicon"/> {{\'MY_PREFERENCES\' | translate}}</a> <a href="#/menu/contact" ng-controller="ShareController as shareCtrl" ng-click="shareCtrl.share()" class="item" menu-close=""><img src="./img/contact_icon.png" class="menuicon"/>  {{\'CONTACT_US\' | translate}}</a></ul></ion-content></ion-side-menu></ion-side-menus>')
     }])
 }(),
 function(t) {
@@ -155,7 +155,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("profile.html", '<ion-view hide-nav-bar="true" cache-view="false"><ion-content has-header="false" scroll="true"><div class="main_bg_1"><div class="row"><div class="col"><div class="bar bar-header bar-light app-name"><div class="icon-left title3 ion-navicon-round sandwich_icon "> </div><h1 class="title head_content"> Me & My Activity </h1><div class="icon-right title4 ion-edit edit_icon"></a> </div></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg_1"> </div> </div></div><div class="row danile_content_width"><div class="col"><h4> Daniel, 35	</h4><p> About Daniel </p><p> I love developing highlyscaleable Software</p>	</div></div><div class="row danile_content_width"><div class="col"><h5> My Friend’s Using JOIN</h5><ul><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> Joined activities (25+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> My Activities (20+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div></div></ion-content></ion-view>')
+        t.put("profile.html", '<ion-view view-title="Me & My Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Me & My Activity</span></ion-nav-title><ion-content has-header="false" scroll="true"><div class="main_bg_1"><div class="row"><div class="col"><div class="bar bar-header bar-light app-name"><div class="icon-left title3 ion-navicon-round sandwich_icon "> </div><h1 class="title head_content"> Me & My Activity </h1><div class="icon-right title4 ion-edit edit_icon"></a> </div></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg_1"> </div> </div></div><div class="row danile_content_width"><div class="col"><h4> Daniel, 35	</h4><p> About Daniel </p><p> I love developing highlyscaleable Software</p>	</div></div><div class="row danile_content_width"><div class="col"><h5> My Friend’s Using JOIN</h5><ul><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> Joined activities (25+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> My Activities (20+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div></div></ion-content></ion-view>')
     }])
 }(),
 function(t) {
@@ -195,7 +195,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("people.html", '<ion-view hide-nav-bar="false" cache-view="false"><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><h2 class="title2">Select People</h2></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg"><div class="wt_txt">Want to JOIN :<br/>Lake. Fun.</div></div><div class="row pad bg"><div class="col pad"><div class="button-bar prf_btn"><a class="icon-left ion-person-stalker org_btn">8</a><a class="icon-left ion-ios-book-outline  org_btn">22</a></div></div></div><div class="row sky_bg"><div class="col"><div class="img_btn"><a href="#"><img src="../img/cros_img_icon.png" alt=""/></a><a href="#" class="img_btn_2"><img src="../img/i_img_icon.png" alt=""/></a><a href="#"><img src="../img/pus_img_icon.png" alt=""/></a></div><p class="sky_p">Swipe to see Activities<br/>Sorted by Distance</p></div></div></div></div></div></div></ion-content></ion-view>')
+        t.put("people.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><h2 class="title2">Select People</h2></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg"><div class="wt_txt">Want to JOIN :<br/>Lake. Fun.</div></div><div class="row pad bg"><div class="col pad"><div class="button-bar prf_btn"><a class="icon-left ion-person-stalker org_btn">8</a><a class="icon-left ion-ios-book-outline  org_btn">22</a></div></div></div><div class="row sky_bg"><div class="col"><div class="img_btn"><a href="#"><img src="../img/cros_img_icon.png" alt="Dislike" class="likeDislikeBtn"/></a><a href="#" class="img_btn_2"><img src="../img/i_img_icon.png" alt="Information" class="informationBtn"/></a><a href="#"><img src="../img/pus_img_icon.png" alt="Like" class="likeDislikeBtn"/></a></div><p class="sky_p">Swipe to see Activities<br/>Sorted by Distance</p></div></div></div></div></div></div></ion-content></ion-view>')
     }])
 }(),
 function(t) {
@@ -205,7 +205,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("settings.html", '<ion-view view-title="{{\'DISCOVERY_TITLE\' | translate}}" cache-view="false"><ion-content><ul class="list"><li class="item item-toggle">{{\'DISCOVERABLE\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.enabled"><div class="track"><div class="handle"></div></div></label></li></ul><div class="item item-divider">{{\'SHOW_ME\' | translate}}:</div><ul class="list"><li class="item item-toggle">{{\'GUYS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.guys"><div class="track"><div class="handle"></div></div></label></li><li class="item item-toggle">{{\'GIRLS\' | translate}} <label class="toggle"><input type="checkbox" ng-model="profile.girls"><div class="track"><div class="handle"></div></div></label></li><li class="item item-divider">{{\'SEARCH_DISTANCE\' | translate}}: {{profile.distance}}{{profile.distanceType}}</li><li class="item" style="height: 60px"><slider floor="1" ceiling="200" ng-model-low="profile.distance" ng-model-high="profile.distance"></slider></li><li class="item item-divider">{{\'AGED_BETWEEN\' | translate}}: {{profile.ageFrom}} to {{profile.ageTo}}</li><li class="item" style="height: 60px"><slider floor="18" ceiling="55" ng-model-low="profile.ageFrom" ng-model-high="profile.ageTo"></slider></li></ul><div style="width:100%;padding-left: 10px;padding-right: 10px;"><button class="button button-block button-positive" ng-click="save()">{{\'SAVE\' | translate}}</button> <button class="button button-block button-light" ng-click="cancel()">{{\'CANCEL\' | translate}}</button></div></ion-content></ion-view>')
+        t.put("settings.html", '<ion-view ng-init="profile={distance:50,ageFrom:18,ageTo:30,autoJoin:true}" view-title="{{\'MY_PREFERENCES_TITLE\' | translate}}" cache-view="false"><ion-nav-title><span><img style="width: 23px;"src="../img/setting_icon.png" class="headertoolbarimage"></span><span>{{\'MY_PREFERENCES_TITLE\' | translate}}</span></ion-nav-title><ion-content scroll="true"><ul class="list"><li class="item item-toggle">Show me:<br>Only activities with auto-join<button class="help_indicator"></button><label style="margin-top: 5px;" class="toggle"><input type="checkbox" ng-model="profile.autoJoin"><div class="track"><div class="handle"></div></div></label></li><li class="item item-divider">{{\'SEARCH_DISTANCE\' | translate}}: {{profile.distance}}{{profile.distanceType}} km</li><li class="item" style="height: 60px"><slider floor="1" ceiling="200" ng-model-low="profile.distance" ng-model-high="profile.distance"></slider></li><li class="item item-divider">Activity creator age: {{profile.ageFrom}} to {{profile.ageTo}}</li><li class="item" style="height: 60px"><slider floor="18" ceiling="55" ng-model-low="profile.ageFrom" ng-model-high="profile.ageTo"></slider></li></ul><div align="center" style="width:100%;padding-left: 10px;padding-right: 10px;"><button class="button save_setting" ng-click="save()">{{\'SAVE\' | translate}}</button> <button class="button button-light" ng-click="cancel()">{{\'CANCEL\' | translate}}</button></div></ion-content></ion-view>')
     }])
 }(),
 function(t) {
@@ -215,7 +215,30 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("sign-in.html", '<ion-view hide-nav-bar="true" cache-view="false"><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg"><div class="row"><div class="col"><div class="app-name"> <img src="./img/header_app_icon.png"  alt=""></div></div></div><div class="row center"><div class="col"><div class="button-bar"><a><i class="icon ion-social-facebook"></i></a> <a class="login_f" ng-show="showForm == true" ng-class="login.class" ng-click="facebookLogin()">Login With Facebook</a></div><div class="or">Or</div><div class="list list_1" ng-show="showForm == true"><div class="first_name">Username/Email</div><label class="item item-input custom_input"><input type="text" placeholder="First Name" ng-model="credentials.email"></label><div class="first_name">Password</div><label class="item item-input custom_input"><input type="text" placeholder="Password" ng-model="credentials.password"></label><div class="button-bar button-bar1"><a id="login" class="button login_btn" ng-click="redirect()">Login</a> <a class="button regis_btn" id="register" ng-click="emailRegister()">Register</a></div></div></div></div></div></ion-content></ion-view>')
+        t.put("sign-in.html", '<ion-view hide-nav-bar="true" cache-view="false">'+
+   '<ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true">'+
+      '<div class="main_bg">'+
+         '<div class="row">'+
+           ' <div class="col">'+
+              ' <div align="center" class="app-name"> <img class="headertoolbarimage" src="./img/header_app_icon.png"  alt=""><span>Sign-In</span></div>'+
+           ' </div>'+
+        ' </div>'+
+        ' <div class="row center">'+
+            '<div class="col">'+
+              ' <div class="button-bar"><a><i class="icon ion-social-facebook"></i></a> <a class="login_f" ng-show="showForm == true" ng-class="login.class" ng-click="facebookLogin()">Login With Facebook</a></div>'+
+              ' <div class="or">Or</div>'+
+               '<div class="list list_1" ng-show="showForm == true">'+
+                 ' <div class="first_name">Username/Email</div>'+
+                 ' <label class="item item-input custom_input"><input type="text" placeholder="First Name" ng-model="credentials.email"></label>'+
+                 ' <div class="first_name">Password</div>'+
+                 ' <label class="item item-input custom_input"><input type="text" placeholder="Password" ng-model="credentials.password"></label>'+
+                  '<div class="button-bar button-bar1"><a id="login" class="button login_btn" ng-click="redirect()">Login</a> <a class="button regis_btn" id="register" ng-click="emailRegister()">Register</a></div>'+
+             '  </div>'+
+            '</div>'+
+        ' </div>'+
+      '</div>'+
+   '</ion-content>'+
+'</ion-view>')
     }])
 }(),
 function(t) {
@@ -225,7 +248,7 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("swipe.html", '<ion-view hide-nav-bar="false" cache-view="false"><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><style>\n' +
+        t.put("swipe.html", '<ion-view hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" style="width: 50px;vertical-align: text-bottom;"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><style>\n' +
             '\n' +
             '      @-webkit-keyframes fade_out_animation {\n' +
             '        0% { -webkit-transform: scale(1); }\n' +
@@ -273,7 +296,7 @@ function(t) {
             '        -moz-animation-timing-function: linear;\n' +
             '        transition: opacity 2s\n' +
             '      }\n' +
-            '    </style><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><div class="button-bar prf_btn2"> <div class="icon-left title3 ion-arrow-right-a "> 7Km </div> <div class="icon-right title4">Tomorrow</a> </div></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg"><div class="wt_txt">Lake. Fun.</div></div><div class="row pad bg"><div class="col pad"><div class="button-bar prf_btn_2"> <a class="icon-left ion-android-share-alt org_btn">share</a></div></div></div><div class="row sky_bg"><div class="col"><div class="img_btn"><a href="#"><img src="./img/cros_img_icon.png" alt=""/></a><a href="#" class="img_btn_2"><img src="./img/i_img_icon.png" alt=""/></a><a href="#"><img src="./img/pus_img_icon.png" alt=""/></a></div><p class="sky_p">Swipe to see Activities <br />Sorted by Distance</p></div></div></div></div></div></div></ion-content></ion-view>')
+            '    </style><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><div class="button-bar prf_btn2"> <div class="icon-left title3 ion-arrow-right-a "> 7Km </div> <div class="icon-right title4">Tomorrow</a> </div></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg"><div class="wt_txt">Lake. Fun.</div></div><div class="row pad bg"><div class="col pad"><div class="button-bar prf_btn_2"> <a class="icon-left ion-android-share-alt org_btn">share</a></div></div></div><div class="row sky_bg"><div class="col"><div class="img_btn"><a href="#"><img src="./img/cros_img_icon.png" alt="Dislike" class="likeDislikeBtn"/></a><a href="#" class="img_btn_2"><img src="./img/i_img_icon.png" alt="Information" class="informationBtn"/></a><a href="#"><img src="./img/pus_img_icon.png" alt="Like" class="likeDislikeBtn"/></a></div><p class="sky_p">Swipe to see Activities <br />Sorted by Distance</p></div></div></div></div></div></div></ion-content></ion-view>')
     }])
 }(),
 function(t) {
@@ -293,7 +316,83 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("createActivitynext.html", '<ion-view hide-nav-bar="true" cache-view="false"><ion-content has-header="false" scroll="true"><div class="main_bg"><div class="row"><div class="col"><div class="barbar-headerbar-lightapp-name"><h1 class="titlehead_content"><img class="title-image" src="../img/header_app_icon.png" alt=""/>CreateActivity</h1></div><div class="barbar-subheadersub_head"><h2 class="title2">LocationFound</h2></div><label class="itemitem-input"><input type="text" ng-model="user.desc" placeholder="Description"></label></div></div><div class="rowpad"><div class="colpad"><div class="profile_bg"><div class="wt_txt"><div class="pub_text"><i class="iconion-edit"></i><p>---------------------<p><i class="iconion-calendar"></i><p>SetDateandTime<p><i class="iconion-information"></i><p>AddInformation<p><i class="iconion-location"></i><p>SetLocationonMap<p><i class="iconion-gear-b"></i><p>Settings<p></div></div></div><div class="rowgreen_bg"><div class="col"><div class="img_btn7"><a href="#"><img src="../img/vid_play_icon.png" alt=""/></a><p>ClickHeretoPublish</p></div></div></div></div></div></div></div></ion-content></ion-view>')
+        t.put("createActivitynext.html", 
+			'<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false">'+
+	   '<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title>'+
+	   '<ion-content has-header="false" scroll="true">'+
+		  '<div class="main_bg">'+
+			' <div class="row">'+
+			   ' <div class="col">'+
+				   '<div class="bar bar-subheader sub_head">'+
+					  '<h2 class="title2">Location Found</h2>'+
+				  ' </div>'+
+				'</div>'+
+			 '</div>'+
+			 '<div class="row pad">'+
+				'<div class="col pad">'+
+				   '<div class="capture_image">'+
+					  '<div class="wt_txt">'+
+                        
+                        
+                        /*'<div class="row">'+
+						  '<div class="col col-33 col-offset-33">'+						  	
+						  	'<button class="button icon-left ion-home">---------------------</button>'+
+						  '</div>'+
+						'</div>'+
+						
+						'<div class="row">'+
+						  '<div class="col col-33 col-offset-33">'+						  	
+						  	'<button class="button icon-left ion-home">SetDateandTime</button>'+
+						  '</div>'+
+						'</div>'+
+						
+						'<div class="row">'+
+						  '<div class="col col-33 col-offset-33">'+						  	
+						  	'<button class="button icon-left ion-home">Add Information</button>'+
+						  '</div>'+
+						'</div>'+
+						
+						'<div class="row">'+
+						  '<div class="col col-33 col-offset-33">'+						  	
+						  	'<button class="button icon-left ion-home">Set Locationon Map</button>'+
+						  '</div>'+
+						'</div>'+
+						
+						
+						'<div class="row">'+
+						  '<div class="col col-33 col-offset-33">'+						  	
+						  	'<button class="button icon-left ion-home">Settings</button>'+
+						  '</div>'+
+						'</div>'+*/
+
+                       '<p>---------------------</p>'+
+						 '<p>Set Date and Time<p>'+
+						 '<p>Add Information<p>'+
+						 '<p>Set Locationon Map<p>'+
+						 '<p>Settings<p>'+
+						 
+					  '</div>'+
+				   '</div>'+
+				   '<div class="row publish_activity_bg">'+
+					  '<div class="col">'+
+						' <div align="center" style="margin-bottom: 10px;">'+
+						   ' <table>'+
+							   '<tr>'+
+								 ' <td class="makephotocls"><button class="vid_play_icon_photo" ng-click ="publish_activity()"></button></td>'+
+							  ' </tr>'+
+							  ' <tr>'+
+								 ' <td style="color: #FFF;" class="retakeimage_lbl_cls">Click here to publish</td>'+
+							  ' </tr>'+
+						   ' </table>'+
+						' </div>'+
+					 ' </div>'+
+				  ' </div>'+
+			   ' </div>'+
+			' </div>'+
+		 ' </div>'+
+		 ' </div>'+
+	  ' </ion-content>'+
+	'</ion-view>')
     }])
 }(),
 function(t) {
@@ -301,9 +400,36 @@ function(t) {
         t = angular.module("templates")
     } catch (e) {
         t = angular.module("templates", [])
-    }
+    }    
     t.run(["$templateCache", function(t) {
-        t.put("createActivity.html", '<ion-view hide-nav-bar="true" cache-view="false"><ion-content has-header="false" scroll="false"><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-header bar-light app-name"><h1 class="title head_content"><img class="title-image"src="../img/header_app_icon.png" alt=""/> Create Activity</h1></div></div></div><div class="row center"><div class="col"><div class="content has-header padding"><h2 class="color_cont mg_top">No JOIN activities </br>in your area?</h2></div><div ng-click ="createActivityLocation()" class="button-bar button-bar1"><a href="#/menu/location" class="button b_first">Be the first: Create an activity</a></div></div></div></div></ion-content></ion-view>')
+        t.put("createActivity.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="false"><div class="main_bg"><div class="row"><div class="col"></div></div><div class="row center"><div class="col"><div class="content has-header padding"><h2 class="color_cont mg_top">No JOIN activities </br>in your area?</h2></div><div ng-click ="createActivityLocation()" class="button-bar button-bar1"><a href="#/menu/createActivitySelect" class="button b_first">Be the first: Create an activity</a></div></div></div></div></ion-content></ion-view>')
+    }])
+}(),
+//create new views
+function(t) {
+    try {
+        t = angular.module("templates")
+    } catch (e) {
+        t = angular.module("templates", [])
+    }    
+    t.run(["$templateCache", function(t) {
+        t.put("createActivitySelect.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false">'+
+        '<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title>'+
+        '<ion-content has-header="false" scroll="false">'+
+        '<div class="row">'+
+        	'<div class="col">'+
+        		'<div align="center" style="padding: 20px;font-size: 18px;color: #018E75;">Searching Location...</div>'+
+        		'<div align="center"><table><tr><td class="makephotocls"><button class="make_photo_icon" ng-click="selectphoto_createActivity()"></button></td><td class="makephotocls"><button class="select_photo_icon" ng-click="makephoto_createActivity()" ></button></td></tr><tr><td class="makephotocls">Make Photo</td><td class="makephotocls">Select Photo</td></tr></table></div><div align="center" style="padding: 40px;font-size: 18px;color: #018E75;">Copy one of your Activities</div><div class="row danile_content_width"><div align="center" class="col"><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div></div></ion-content></ion-view>')
+    }])
+}(),
+function(t) {
+    try {
+        t = angular.module("templates")
+    } catch (e) {
+        t = angular.module("templates", [])
+    }    
+    t.run(["$templateCache", function(t) {
+        t.put("selectPhoto.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title><ion-content has-header="false" scroll="true" overflow-scroll="true" scrollbar-x="true" scrollbar-y="true"><div class="main_bg"><div class="row"><div class="col"><div class="bar bar-subheader sub_head"><h2 class="title2">Location Found</h2></div></div></div><div class="row pad"><div class="col pad"><div class="capture_image"><div class="wt_txt" on-swipe-left="onSwipeLeft_createActivity()">What is the Activity.</div></div><div class="row grey_bg"><div class="col"><div align="center" style="margin-bottom: 10px;"><table><tr><td class="makephotocls"><button class="retake_Photo" ng-click="onRetake_Photo_createActivity()"></button></td><td class="makephotocls"><button class="Reselect_Photo " ng-click="onReselect_Photo_createActivity()"></button></td></tr><tr><td class="retakeimage_lbl_cls">Retake Photo</td><td class="retakeimage_lbl_cls">Reselect Photo</td></tr></table></div></div></div></div></div></div></div></ion-content></ion-view>')
     }])
 }();
 // Compressed using http://javascript-minifier.com/ 

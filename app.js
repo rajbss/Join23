@@ -220,11 +220,14 @@ var TRANSLATION_EN = {
     CROP_YOUR_PHOTO: "Crop your photo",
 
     DISCOVERY_TITLE: "Discovery Preferences",
+    MY_PREFERENCES_TITLE: "My Preferences",
+    ACTIVITY_SETTINGS_TITLE: "Activity Settings",
     DISCOVERABLE: "Discoverable",
-    SHOW_ME: "Show me",
+    SHOW_ME: "Who can Join",
+    AUTOMATIC_JOIN: "Automatic Join",
     GUYS: "Guys",
     GIRLS: "Girls",
-    SEARCH_DISTANCE: "Search distance",
+    SEARCH_DISTANCE: "Search Distance",
     AGED_BETWEEN: "Aged between",
 
     SETTINGS_TITLE: "App Settings",
@@ -728,7 +731,7 @@ function onNotificationOpen(pnObj) {
 			$ionicHistory.nextViewOptions({
 				disableBack: true
 			});
-			$state.go("signin");
+			$state.go("menu/createActivity");
 		}
 
 		function deleteAccount() {
@@ -2404,27 +2407,39 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
         url: "/sign-in",
         templateUrl: "sign-in.html",
         controller: "SignInCtrl"
-    }).state("emailVerification", {
+    })
+    
+    .state("emailVerification", {
         url: "/emailVerification",
         templateUrl: "emailVerification.html",
         controller: "EmailVerificationCtrl"
-    }).state("profileSetup", {
+    })
+    
+    .state("profileSetup", {
         url: "/profileSetup",
         templateUrl: "profileSetup.html",
         controller: "ProfileSetupCtrl"
-    }).state("locationSetup", {
+    })
+    
+    .state("locationSetup", {
         url: "/locationSetup",
         templateUrl: "locationSetup.html",
         controller: "LocationSetupCtrl"
-    }).state("termsOfUse", {
+    })
+    
+    .state("termsOfUse", {
         url: "/termsOfUse",
         templateUrl: "termsOfUse.html",
         controller: "TermsOfUseCtrl"
-    }).state("menu", {
+    })
+    
+    .state("menu", {
         url: "/menu",
         abstract: true,
         templateUrl: "menu.html"
-    }).state("menu.home", {
+    })
+    
+    .state("menu.home", {
         url: "/home",
         views: {
             menuContent: {
@@ -2433,7 +2448,6 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
             }
         }
     })
-	
 	
 	.state("menu.people", {
         url: "/people",
@@ -2444,6 +2458,7 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
             }
         }
     })
+	
 	.state("menu.card-info", {
         url: "/card-info",
         views: {
@@ -2452,7 +2467,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "CardInfoCtrl"
             }
         }
-    }).state("menu.match-profile", {
+    })
+    
+    .state("menu.match-profile", {
         url: "/match-profile/:matchId/:profileId",
         views: {
             menuContent: {
@@ -2469,7 +2486,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 }
             }]
         }
-    }).state("menu.chats", {
+    })
+    
+    .state("menu.chats", {
         url: "/chats",
         views: {
             menuContent: {
@@ -2477,7 +2496,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "ChatsCtrl"
             }
         }
-    }).state("menu.chat", {
+    })
+    
+    .state("menu.chat", {
         url: "/chat/:matchId",
         views: {
             menuContent: {
@@ -2485,7 +2506,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "ChatCtrl"
             }
         }
-    }).state("menu.profile", {
+    })
+    
+    .state("menu.profile", {
         url: "/profile",
         views: {
             menuContent: {
@@ -2493,14 +2516,18 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "ProfileCtrl"
             }
         }
-    }).state("menu.profile-edit", {
+    })
+    
+    .state("menu.profile-edit", {
         url: "/profile-edit",
         views: {
             menuContent: {
                 templateUrl: "profileEdit.html"
             }
         }
-    }).state("menu.fb-albums", {
+    })
+    
+    .state("menu.fb-albums", {
         url: "/fb-albums",
         views: {
             menuContent: {
@@ -2508,7 +2535,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "FbAlbumsCtrl"
             }
         }
-    }).state("menu.fb-album", {
+    })
+    
+    .state("menu.fb-album", {
         url: "/fb-album/:albumId",
         views: {
             menuContent: {
@@ -2516,7 +2545,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "FbAlbumCtrl"
             }
         }
-    }).state("menu.crop", {
+    })
+    
+    .state("menu.crop", {
         url: "/crop",
         views: {
             menuContent: {
@@ -2524,7 +2555,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "PhotoCropCtrl"
             }
         }
-    }).state("menu.discovery", {
+    })
+    
+    .state("menu.discovery", {
         url: "/discovery",
         views: {
             menuContent: {
@@ -2532,7 +2565,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "DiscoveryCtrl"
             }
         }
-	}).state("menu.location", {
+	})
+	
+	.state("menu.location", {
         url: "/location",
         views: {
             menuContent: {
@@ -2540,15 +2575,19 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "LocationCtrl"
             }
         }
-    }).state("menu.createActivity", {
+    })
+    
+    .state("menu.createActivity", {
         url: "/createActivity",
         views: {
             menuContent: {
-                templateUrl: "createActivity.html",
-                controller: "SettingsCtrl"
+                templateUrl: "createActivity.html"/*,
+                controller: "SettingsCtrl"*/
             }
         }
-    }).state("menu.settings", {
+    })
+    
+    .state("menu.settings", {
         url: "/settings",
         views: {
             menuContent: {
@@ -2556,7 +2595,9 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "SettingsCtrl"
             }
         }
-    }).state("menu.contactq", {
+    })
+    
+    .state("menu.contactq", {
         url: "/contact",
         views: {
             menuContent: {
@@ -2564,17 +2605,42 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "ContactCtrl"
             }
         }
-	}).state("menu.createActivitynext", {
+	})
+	/*start*/
+	.state("menu.createActivitySelect", {
+			url: "/createActivitySelect",
+			views: {
+				menuContent: {
+					templateUrl: "createActivitySelect.html",
+					controller: "SettingsCtrl"
+				}
+			}
+		})
+		
+		.state("menu.selectPhoto", {
+			url: "/selectPhoto",
+			views: {
+				menuContent: {
+					templateUrl: "selectPhoto.html",
+					controller: "SettingsCtrl"
+				}
+			}
+		})
+		/*End*/
+	.state("menu.createActivitynext", {
         url: "/createActivitynext",
         views: {
             menuContent: {
                 templateUrl: "createActivitynext.html",
-                controller: "ContactCtrl"
+                controller: "SettingsCtrl"
             }
 		}
 		});
 		
-    $urlRouterProvider.otherwise("/sign-in");
+		
+		
+		
+    $urlRouterProvider.otherwise("/menu/createActivity");
 }]);
 "use strict";
 
@@ -2765,7 +2831,7 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
     };
 	$scope.createActivityLocation = function () {
 		
-          $state.go("locationMap");
+         // $state.go("locationMap");
         
     };
 
@@ -3003,7 +3069,8 @@ angular.module("controllers").controller("CardsCtrl", ["$log", "$scope", "$state
     $scope.matches = null;
 
     var profile = $scope.profile = AppService.getProfile();
-    $scope.profilePhoto = profile.photoUrl;
+    //todo
+    //$scope.profilePhoto = profile.photoUrl;
 
     $scope.$on("$ionicView.beforeEnter", function () {
         $scope.unreadChats = AppService.getUnreadChatsCount() > 0;
@@ -3526,7 +3593,7 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         translations = translationsResult;
     });
 
-    $scope.profile = AppService.getProfile().clone();
+   // $scope.profile = AppService.getProfile().clone();
 
     $scope.save = function () {
         $ionicLoading.show({ templateUrl: "loading.html" });
@@ -3539,7 +3606,33 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
             $ionicLoading.hide();
         });
     };
-
+    //krishna
+     $scope.selectphoto_createActivity = function () {
+     	$state.go("menu.selectPhoto");
+     };
+     
+     $scope.makephoto_createActivity = function () {
+     	$state.go("menu.selectPhoto");
+     };
+     
+     $scope.onReselect_Photo_createActivity = function () {
+     	$state.go("menu.createActivitySelect");
+     };
+     
+     $scope.onRetake_Photo_createActivity = function () {
+     	$state.go("menu.createActivitySelect");
+     };
+     $scope.onSwipeLeft_createActivity = function () {
+     	$state.go("menu.createActivitynext");
+     	//alert('a');
+     };
+	
+	
+	 $scope.publish_activity = function () {
+    	angular.aaaaa=$scope;
+    	$state.go('signin');
+    };
+	
     $scope.cancel = function () {
         $scope.profile = AppService.getProfile($scope).clone();
     };
@@ -3601,7 +3694,8 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         }).always(function () {
             $ionicLoading.hide();
         });
-    };
+    };   
+    
 }]).controller("LocationCtrl", ["$scope", "$translate", "AppService", "$ionicLoading", "AppUtil", function ($scope, $translate, AppService, $ionicLoading, AppUtil) {
 
     // TODO load the google map script async here when required instead of index.html
