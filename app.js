@@ -3587,14 +3587,33 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         $scope.profile = AppService.getProfile($scope).clone();
     };
 }]).controller("SettingsCtrl", ["$log", "$scope", "$rootScope", "$state", "$translate", "$mdToast", "AppService", "$ionicLoading", "$ionicActionSheet", "$cordovaFacebook", function ($log, $scope, $rootScope, $state, $translate, $mdToast, AppService, $ionicLoading, $ionicActionSheet, $cordovaFacebook) {
-
+	
+	//check select photo root scope data 
+	if($rootScope.selectPhotoData){
+		$scope.selectPhotoData=$rootScope.selectPhotoData;
+	}
+	
     var translations;
     $translate(["SETTINGS_SAVE_ERROR", "DELETE", "DELETE_ACCOUNT", "CANCEL"]).then(function (translationsResult) {
         translations = translationsResult;
     });
 
    // $scope.profile = AppService.getProfile().clone();
-
+	
+	
+	
+	//static data for create Activity list 
+	$scope.ActivityData=new Object({"data":[{"title":"1","img_url":"../img/add.png"},{"title":"2","img_url":"../img/camera_img.png"},{"title":"3","img_url":"../img/chat_1.png"},{"title":"4","img_url":"../img/fire-small.png"},{"title":"5","img_url":"../img/fire.png"},{"title":"6","img_url":"../img/help_icon.png"},{"title":"7","img_url":"../img/lisa_chat_icon.png"}]});
+    $scope.ActivityData=$scope.ActivityData.data;
+   	
+   	
+   	
+   	
+   	$scope.onItemtapActivityData = function (activity_Data) {
+   		$rootScope.selectPhotoData=activity_Data;
+   		$state.go("menu.selectPhoto");
+   	};
+   	
     $scope.save = function () {
         $ionicLoading.show({ templateUrl: "loading.html" });
         AppService.saveSettings($scope.profile).then(function (result) {

@@ -1137,7 +1137,7 @@ a.item {
     height: 510px;
     margin-top: 50px;
     width: 100%;
-    background-size: 100% 100%;
+    background-size: 100% 100% !important;
 }
 
 
@@ -1189,4 +1189,16 @@ a.item {
 .publish_activity_bg {
     background: #49C1A9;
     border-bottom: 20px solid #49C1A9;
+}
+
+.ca_infoBtnCls{
+	margin: 0 auto !important;
+	background-color: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    text-align: left !important;
+    text-indent: 15px !important;
+    width: 200px !important;
 }
