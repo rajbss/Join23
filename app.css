@@ -1191,14 +1191,26 @@ a.item {
     border-bottom: 20px solid #49C1A9;
 }
 
-.ca_infoBtnCls{
+
+.saveLocationBtnCls{
 	margin: 0 auto !important;
-	background-color: transparent !important;
+    background-color: #018E75 !important;
     border: none !important;
     color: #ffffff !important;
     border-color: transparent !important;
     box-shadow: none !important;
-    text-align: left !important;
-    text-indent: 15px !important;
-    width: 200px !important;
+    text-align: center !important;
+    width: 80% !important;
+    line-height: 35px;
+    font-size: 17px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.ca_menuList{
+	margin: 0 auto;
+	color: #fff;
+	padding: 10px;
+	width: 233px;
+	text-align: left;
 }

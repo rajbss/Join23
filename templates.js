@@ -135,7 +135,17 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("menu.html", '<ion-side-menus enable-menu-with-back-views="false"><ion-side-menu-content><ion-nav-bar class="bar-positive"><ion-nav-back-button></ion-nav-back-button><ion-nav-buttons side="left"><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button></ion-nav-buttons></ion-nav-bar><ion-nav-view name="menuContent"><div class="bar bar-header bar-light app-name"><h1 class="title head_content"></h1></div></ion-nav-view></ion-side-menu-content><ion-side-menu side="left" id="menu-left"><ion-header-bar class="bar-positive"><h1 class="title">title</h1></ion-header-bar><ion-content><ul class="list"><a ui-sref="menu.profile" class="item" menu-close=""><img src="./img/user_icon.png" class="menuicon"/>  {{\'ME_AND_MY_ACTIVITIES\' | translate}}</a> <a href="#/menu/discovery" class="item" menu-close=""><img src="./img/run_people.png" class="menuicon"/>  {{\'DISCOVER_ACTIVITIES\' | translate}}</a> <a href="#/menu/chats" class="item" menu-close=""><img src="./img/chat_icon.png" class="menuicon"/> {{\'MENU_CHAT\' | translate}}</a> <a href="#/menu/home" class="item" menu-close=""><img src="./img/search_icon.png" class="menuicon"/> {{\'FIND_ACTIVITIES\' | translate}}</a> <a href="#/menu/createActivity" class="item" menu-close=""><img src="./img/plus_icon.png" class="menuicon"/>{{\'CREATE_ACTIVITY\' | translate}}</a> <a href="#/menu/people" class="item" menu-close=""><img src="./img/select_people_icon.png" class="menuicon"/> {{\'SELECT_PEOPLE\' | translate}}</a> <a href="#/menu/settings" class="item" menu-close=""><img src="./img/setting_icon.png" class="menuicon"/> {{\'MY_PREFERENCES\' | translate}}</a> <a href="#/menu/contact" ng-controller="ShareController as shareCtrl" ng-click="shareCtrl.share()" class="item" menu-close=""><img src="./img/contact_icon.png" class="menuicon"/>  {{\'CONTACT_US\' | translate}}</a></ul></ion-content></ion-side-menu></ion-side-menus>')
+        t.put("menu.html", '<ion-side-menus enable-menu-with-back-views="false">'+
+        
+        
+        '<ion-side-menu-content><ion-nav-bar class="bar-positive"><ion-nav-back-button></ion-nav-back-button><ion-nav-buttons side="left"><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button></ion-nav-buttons>'+
+        
+        //krishna-menu
+        //'<ion-nav-buttons side="right"><button class="button button-clear ion-edit" ></button></ion-nav-buttons>'+
+        
+        '</ion-nav-bar><ion-nav-view name="menuContent"><div class="bar bar-header bar-light app-name"><h1 class="title head_content"></h1></div></ion-nav-view></ion-side-menu-content>'+
+        
+        '<ion-side-menu side="left" id="menu-left"><ion-header-bar class="bar-positive"><h1 class="title">title</h1></ion-header-bar><ion-content><ul class="list"><a ui-sref="menu.profile" class="item" menu-close=""><img src="./img/user_icon.png" class="menuicon"/>  {{\'ME_AND_MY_ACTIVITIES\' | translate}}</a> <a href="#/menu/discovery" class="item" menu-close=""><img src="./img/run_people.png" class="menuicon"/>  {{\'DISCOVER_ACTIVITIES\' | translate}}</a> <a href="#/menu/chats" class="item" menu-close=""><img src="./img/chat_icon.png" class="menuicon"/> {{\'MENU_CHAT\' | translate}}</a> <a href="#/menu/home" class="item" menu-close=""><img src="./img/search_icon.png" class="menuicon"/> {{\'FIND_ACTIVITIES\' | translate}}</a> <a href="#/menu/createActivity" class="item" menu-close=""><img src="./img/plus_icon.png" class="menuicon"/>{{\'CREATE_ACTIVITY\' | translate}}</a> <a href="#/menu/people" class="item" menu-close=""><img src="./img/select_people_icon.png" class="menuicon"/> {{\'SELECT_PEOPLE\' | translate}}</a> <a href="#/menu/settings" class="item" menu-close=""><img src="./img/setting_icon.png" class="menuicon"/> {{\'MY_PREFERENCES\' | translate}}</a> <a href="#/menu/contact" ng-controller="ShareController as shareCtrl" ng-click="shareCtrl.share()" class="item" menu-close=""><img src="./img/contact_icon.png" class="menuicon"/>  {{\'CONTACT_US\' | translate}}</a></ul></ion-content></ion-side-menu></ion-side-menus>')
     }])
 }(),
 function(t) {
@@ -155,7 +165,69 @@ function(t) {
         t = angular.module("templates", [])
     }
     t.run(["$templateCache", function(t) {
-        t.put("profile.html", '<ion-view view-title="Me & My Activity" hide-nav-bar="false" cache-view="false"><ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Me & My Activity</span></ion-nav-title><ion-content has-header="false" scroll="true"><div class="main_bg_1"><div class="row"><div class="col"><div class="bar bar-header bar-light app-name"><div class="icon-left title3 ion-navicon-round sandwich_icon "> </div><h1 class="title head_content"> Me & My Activity </h1><div class="icon-right title4 ion-edit edit_icon"></a> </div></div></div></div><div class="row pad"><div class="col pad"><div class="profile_bg_1"> </div> </div></div><div class="row danile_content_width"><div class="col"><h4> Daniel, 35	</h4><p> About Daniel </p><p> I love developing highlyscaleable Software</p>	</div></div><div class="row danile_content_width"><div class="col"><h5> My Friend’s Using JOIN</h5><ul><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li><img src="../img/img_thumbnail_slider.png" alt=""/></li><li></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> Joined activities (25+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div><div class="row danile_content_width"><div class="col"><h5> My Activities (20+)</h5><ul><li><img src="../img/join_activity_1.png" alt=""/></li><li><img src="../img/join_activity_2.png" alt=""/></li><li><img src="../img/join_activity_3.png" alt=""/></li><li><img src="../img/join_activity_4.png" alt=""/></li>	<li><img src="../img/join_activity_5.png" alt=""/></li>	</ul></div></div></div></ion-content></ion-view>')
+        t.put("profile.html", '<ion-view view-title="Me & My Activity" hide-nav-bar="false" cache-view="false">'+
+			   '<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Me & My Activity</span></ion-nav-title>'+
+			   '<ion-content has-header="false" scroll="true">'+
+				  '<div class="main_bg_1">'+
+					 '<div class="row">'+
+						'<div class="col">'+
+						  ' <div class="bar bar-header bar-light app-name">'+
+							  '<div class="icon-left title3 ion-navicon-round sandwich_icon "> </div>'+
+							  '<h1 class="title head_content"> Me & My Activity </h1>'+
+							  '<div class="icon-right title4 ion-edit edit_icon"></a> </div>'+
+						   '</div>'+
+						'</div>'+
+					 '</div>'+
+					 '<div class="row pad">'+
+						'<div class="col pad">'+
+						   '<div class="profile_bg_1"> </div>'+
+						'</div>'+
+					 '</div>'+
+					 '<div class="row danile_content_width">'+
+						'<div class="col">'+
+						   '<h4> Daniel, 35	</h4>'+
+						   '<p> About Daniel </p>'+
+						   '<p> I love developing highlyscaleable Software</p>'+
+						'</div>'+
+					 '</div>'+
+					 '<div class="row danile_content_width">'+
+						'<div class="col">'+
+						   '<h5> My Friend’s Using JOIN</h5>'+
+						   '<ul>'+
+							  '<li><img src="../img/img_thumbnail_slider.png" alt=""/></li>'+
+							  '<li><img src="../img/img_thumbnail_slider.png" alt=""/></li>'+
+							  '<li><img src="../img/img_thumbnail_slider.png" alt=""/></li>'+
+							 ' <li></li>'+
+						   '</ul>'+
+						'</div>'+
+					 '</div>'+
+					 '<div class="row danile_content_width">'+
+						'<div class="col">'+
+						   '<h5> Joined activities (25+)</h5>'+
+						   '<ul>'+
+							  '<li><img src="../img/join_activity_1.png" alt=""/></li>'+
+							 ' <li><img src="../img/join_activity_2.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_3.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_4.png" alt=""/></li>'+
+							 ' <li><img src="../img/join_activity_5.png" alt=""/></li>'+
+						   '</ul>'+
+						'</div>'+
+					 '</div>'+
+					 '<div class="row danile_content_width">'+
+						'<div class="col">'+
+						   '<h5> My Activities (20+)</h5>'+
+						   '<ul>'+
+							  '<li><img src="../img/join_activity_1.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_2.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_3.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_4.png" alt=""/></li>'+
+							  '<li><img src="../img/join_activity_5.png" alt=""/></li>'+
+						   '</ul>'+
+						'</div>'+
+					 '</div>'+
+				 ' </div>'+
+			   '</ion-content>'+
+			'</ion-view>')
     }])
 }(),
 function(t) {
@@ -334,64 +406,42 @@ function(t) {
 					  '<div class="wt_txt">'+
                         
                        '<ion-list >'+
-							'<ion-item style="background-color: transparent;border: none;padding: 0px;">'+
-								
+							'<ion-item style="background-color: transparent;border: none;padding: 0px;">'+								
 								
 								'<div class="row">'+
-									'<div style="margin: 0 auto;color: #fff;padding: 10px;width: 233px;text-align: left;">'+
+									'<div class="ca_menuList">'+
 										'<span style="margin-right: 15px;"><i class="icon icon-left ion-edit"></i></span>'+										
-										'<input type="text" placeholder="---------------------" style="display: inline-block !important;background-color: transparent !important;color: #ffffff !important;">'+
+										'<input type="text" placeholder="---------------------------" style="font-weight: bold;display: inline-block !important;background-color: transparent !important;color: #ffffff !important;">'+
 									'</div>'+
 								'</div>'+
 								
 								'<div class="row">'+
-									'<div style="margin: 0 auto;color: #fff;padding: 10px;width: 233px;text-align: left;">'+
+									'<div class="ca_menuList">'+
 										'<span style="margin-right: 15px;"><i class="icon icon-left ion-android-calendar"></i></span>'+
-										'<span>Set Date and Time</span>'+
+										'<span style="font-weight: bold;">Set Date and Time</span>'+
 									'</div>'+
 								'</div>'+
 								
 								'<div class="row">'+
-									'<div style="margin: 0 auto;color: #fff;padding: 10px;width: 233px;text-align: left;">'+
+									'<div class="ca_menuList">'+
 										'<span style="margin-right: 15px;"><i class="icon icon-left ion-information"></i></span>'+
-										'<span>Add Information</span>'+
+										'<span style="font-weight: bold;">Add Information</span>'+
 									'</div>'+
 								'</div>'+
 								
 								'<div class="row">'+
-									'<div style="margin: 0 auto;color: #fff;padding: 10px;width: 233px;text-align: left;">'+
+									'<div class="ca_menuList" ng-click="onSetLocationonMap()">'+
 										'<span style="margin-right: 15px;"><i class="icon icon-left ion-location"></i></span>'+
-										'<span>Set Locationon Map</span>'+
+										'<span style="font-weight: bold;">Set Location Map</span>'+
 									'</div>'+
 								'</div>'+
 								
 								'<div class="row">'+
-									'<div style="margin: 0 auto;color: #fff;padding: 10px;width: 233px;text-align: left;">'+
+									'<div class="ca_menuList">'+
 										'<span style="margin-right: 15px;"><i class="icon icon-left ion-android-settings"></i></span>'+
-										'<span>Settings</span>'+
+										'<span style="font-weight: bold;">Settings</span>'+
 									'</div>'+
 								'</div>'+
-								
-								
-								/*'<div class="row">'+		  	
-						  				'<button class="button icon-left ion-edit ca_infoBtnCls">---------------------</button>'+
-								'</div>'+
-								
-								'<div class="row">'+
-									'<button class="button icon-left ion-android-calendar ca_infoBtnCls">Set Date and Time</button>'+
-								'</div>'+
-								
-								'<div class="row">'+	  	
-						  			'<button class="button icon-left ion-information ca_infoBtnCls">Add Information</button>'+
-								'</div>'+
-								
-								'<div class="row">'+
-									'<button class="button icon-left ion-location ca_infoBtnCls">Set Locationon Map</button>'+						  			
-								'</div>'+
-								
-								'<div class="row">'+
-									'<button class="button icon-left ion-android-settings ca_infoBtnCls">Settings</button>'+						  			
-								'</div>'+*/
 							
 						'</ion-item>'+
 
@@ -518,6 +568,26 @@ function(t) {
 						 '</div>'+
 					  '</div>'+
 					  '</div>'+
+				   '</ion-content>'+
+				'</ion-view>')
+    }])
+}(),
+
+function(t) {
+    try {
+        t = angular.module("templates")
+    } catch (e) {
+        t = angular.module("templates", [])
+    }    
+    t.run(["$templateCache", function(t) {
+        t.put("mapLocation.html", '<ion-view view-title="Create Activity" hide-nav-bar="false" cache-view="false">'+
+				   '<ion-nav-title><span><img src="../img/header_app_icon.png" class="headertoolbarimage"></span><span>Create Activity</span></ion-nav-title>'+
+				   '<ion-content has-header="false" scroll="false">'+
+						'<div style="height:85%" id="locationMap" data-tap-disabled="true"></div>'+
+						
+						'<div class="row row-bottom" style="margin-top: 7px;">'+
+								'<button class="saveLocationBtnCls" ng-click="setLocation()">Save</button>'+
+					  	'</div>'+
 				   '</ion-content>'+
 				'</ion-view>')
     }])

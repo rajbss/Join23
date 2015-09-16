@@ -2626,6 +2626,16 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
 				}
 			}
 		})
+		
+		.state("menu.mapLocation", {
+			url: "/mapLocation",
+			views: {
+				menuContent: {
+					templateUrl: "mapLocation.html",
+					controller: "LocationSetupCtrl"
+				}
+			}
+		})
 		/*End*/
 	.state("menu.createActivitynext", {
         url: "/createActivitynext",
@@ -3377,7 +3387,7 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
     $scope.logout = function () {
         return AppService.logout();
     };
-}]).controller("LocationSetupCtrl", ["$scope", "$translate", "AppService", "AppUtil", "$ionicPopup", function ($scope, $translate, AppService, AppUtil, $ionicPopup) {
+}]).controller("LocationSetupCtrl", ["$scope", "$translate", "AppService", "AppUtil", "$ionicPopup","$state", function ($scope, $translate, AppService, AppUtil, $ionicPopup,$state) {
 
     var translations;
     $translate(["SETTINGS_SAVE_ERROR", "GPS_ERROR", "SET_MAP_LOCATION"]).then(function (translationsResult) {
@@ -3396,7 +3406,7 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         disableDoubleClickZoom: true
     };
 
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
     $scope.map = map;
     map.setCenter(latLng);
 
@@ -3406,29 +3416,41 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         title: "My Location",
         draggable: true
     });
-
+	 
+	 
+	 navigator.geolocation.getCurrentPosition(function(pos) {
+        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        marker.setPosition(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      }, function(error) {
+           $ionicPopup.alert({
+				title: translations.GPS_ERROR,
+				template: translations.SET_MAP_LOCATION
+			});
+      });
+      
+      
     google.maps.event.addListener(map, "click", function (event) {
         marker.setPosition(event.latLng);
     });
 
     $scope.setLocation = function () {
         var pos = marker.getPosition();
-
-        AppUtil.blockingCall(AppService.saveProfile({ gps: false, location: { latitude: pos.lat(), longitude: pos.lng() } }), function () {
+        /*AppUtil.blockingCall(AppService.saveProfile({ gps: false, location: { latitude: pos.lat(), longitude: pos.lng() } }), function () {
             return AppService.goToNextLoginState();
-        }, "SETTINGS_SAVE_ERROR");
+        }, "SETTINGS_SAVE_ERROR");*/
+        $state.go("menu.createActivitynext");
     };
 
     $scope.cancel = function () {
         return AppService.logout();
     };
 
-    $scope.$on("$ionicView.afterEnter", function (event) {
+    /*$scope.$on("$ionicView.afterEnter", function (event) {
         $ionicPopup.alert({
             title: translations.GPS_ERROR,
             template: translations.SET_MAP_LOCATION
         });
-    });
+    });*/
 }]).controller("TermsOfUseCtrl", ["$scope", "AppService", "AppUtil", function ($scope, AppService, AppUtil) {
 
     // Required for Apple store submission when there is user generated content.
@@ -3631,19 +3653,27 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
      };
      
      $scope.makephoto_createActivity = function () {
+     	console.log('SettingsCtrl-makephoto_createActivity');
      	$state.go("menu.selectPhoto");
      };
      
      $scope.onReselect_Photo_createActivity = function () {
+     	console.log('SettingsCtrl-onReselect_Photo_createActivity');
      	$state.go("menu.createActivitySelect");
      };
      
      $scope.onRetake_Photo_createActivity = function () {
+     	console.log('SettingsCtrl-onRetake_Photo_createActivity');
      	$state.go("menu.createActivitySelect");
      };
      $scope.onSwipeLeft_createActivity = function () {
+     	console.log('SettingsCtrl-onSwipeLeft_createActivity');
      	$state.go("menu.createActivitynext");
-     	//alert('a');
+     };
+     
+     $scope.onSetLocationonMap = function () {
+     	console.log('SettingsCtrl-onSetLocationonMap');
+     	$state.go("menu.mapLocation");
      };
 	
 	
