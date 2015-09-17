@@ -843,8 +843,7 @@ a.item {
 .profile_bg_1 {
     background: rgba(0, 0, 0, 0) url("../img/slider_me_my.jpg") no-repeat scroll left top;
     float: left;
-    height: 602px;
-    margin-top: 60px;
+    height: 440px;
     width: 100%;
     background-size: 100%;
 }
