@@ -1414,7 +1414,9 @@ Object.defineProperty(Match.prototype, "profile", {
 });
 
 angular.module("service.parse", ["constants"]).factory("ParseService", ["$q", "$log", "parseAppId", "parseJavascriptKey", "parseClientKey", function ($q, $log, parseAppId, parseJavascriptKey, parseClientKey) {
-
+	
+	//parseAppId="gXGG987PyAx0v7eAri2mXXiE1ReTlFOiyzr2bggm";
+	//parseJavascriptKey="GbU9MS2ClH7LiH93DWC6qDdFTWedwG2UflKA6pzw";
     Parse.initialize(parseAppId, parseJavascriptKey);
 
     var service = {
@@ -2359,7 +2361,15 @@ var app = angular.module("ionicApp", ["constants", "ionic", "AppUtil", "template
         return "";
     };
 })
-
+// fitlers
+.filter('nl2br', ['$filter',
+  function($filter) {
+    return function(data) {
+      if (!data) return data;
+      return data.replace(/\n\r?/g, '<br />');
+    };
+  }
+])
 // This allow a chat message to be sent when you tap return
 // TODO maybe apply more specific, make it a class attribute
 .directive("input", ["$timeout", function ($timeout) {
@@ -2398,7 +2408,55 @@ var app = angular.module("ionicApp", ["constants", "ionic", "AppUtil", "template
             });
         }
     };
-}]);
+}])
+.directive('standardTimeMeridian', function () {
+        return {
+            restrict: 'AE',
+            replace: true,
+            scope: {
+                etime: '=etime'
+            },
+            template: "<strong>{{stime}}</strong>",
+            link: function (scope, elem, attrs) {
+
+                scope.stime = epochParser(scope.etime, 'time');
+
+                function prependZero(param) {
+                    if (String(param).length < 2) {
+                        return "0" + String(param);
+                    }
+                    return param;
+                }
+
+                function epochParser(val, opType) {
+                    if (val === null) {
+                        return "00:00";
+                    } else {
+                        var meridian = ['AM', 'PM'];
+
+                        if (opType === 'time') {
+                            var hours = parseInt(val / 3600);
+                            var minutes = (val / 60) % 60;
+                            var hoursRes = hours > 12 ? (hours - 12) : hours;
+
+                            var currentMeridian = meridian[parseInt(hours / 12)];
+
+                            return (prependZero(hoursRes) + ":" + prependZero(minutes) + " " + currentMeridian);
+                        }
+                    }
+                }
+
+                scope.$watch('etime', function (newValue, oldValue) {
+                    scope.stime = epochParser(scope.etime, 'time');
+                });
+
+            }
+        };
+    })
+    
+    
+    
+;
 "use strict";
 
 angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
@@ -2409,6 +2467,61 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
         controller: "SignInCtrl"
     })
     
+    .state("menu.createActivity", {
+        url: "/createActivity",
+        views: {
+            menuContent: {
+                templateUrl: "createActivity.html"
+            }
+        }
+    })
+    
+	
+	.state("menu.createActivitySelect", {
+		url: "/createActivitySelect",
+		views: {
+			menuContent: {
+				templateUrl: "createActivitySelect.html",				
+				controller: "createActivity_Select_Ctrl"
+			}
+		}
+	})
+	
+	.state("menu.selectPhoto", {
+		url: "/selectPhoto",
+		views: {
+			menuContent: {
+				templateUrl: "selectPhoto.html",
+				//controller: "SettingsCtrl"
+				controller: "C_A_selectPhoto_Ctrl"
+			}
+		}
+	})
+	
+	.state("menu.mapLocation", {
+		url: "/mapLocation",
+		views: {
+			menuContent: {
+				templateUrl: "mapLocation.html",
+				controller: "LocationSetupCtrl"
+			}
+		}
+	})
+		
+		
+		
+	.state("menu.createActivitynext", {
+		url: "/createActivitynext",
+		views: {
+			menuContent: {
+				templateUrl: "createActivitynext.html",
+				//controller: "SettingsCtrl"
+				controller: "createActivitynextCtrl"
+			}
+		}
+	})
+	
+	
     .state("emailVerification", {
         url: "/emailVerification",
         templateUrl: "emailVerification.html",
@@ -2577,15 +2690,7 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
         }
     })
     
-    .state("menu.createActivity", {
-        url: "/createActivity",
-        views: {
-            menuContent: {
-                templateUrl: "createActivity.html"/*,
-                controller: "SettingsCtrl"*/
-            }
-        }
-    })
+    
     
     .state("menu.settings", {
         url: "/settings",
@@ -2605,52 +2710,16 @@ angular.module("ionicApp").config(["$stateProvider", "$urlRouterProvider", funct
                 controller: "ContactCtrl"
             }
         }
-	})
-	/*start*/
-	.state("menu.createActivitySelect", {
-			url: "/createActivitySelect",
-			views: {
-				menuContent: {
-					templateUrl: "createActivitySelect.html",
-					controller: "SettingsCtrl"
-				}
-			}
-		})
-		
-		.state("menu.selectPhoto", {
-			url: "/selectPhoto",
-			views: {
-				menuContent: {
-					templateUrl: "selectPhoto.html",
-					controller: "SettingsCtrl"
-				}
-			}
-		})
-		
-		.state("menu.mapLocation", {
-			url: "/mapLocation",
-			views: {
-				menuContent: {
-					templateUrl: "mapLocation.html",
-					controller: "LocationSetupCtrl"
-				}
-			}
-		})
-		/*End*/
-	.state("menu.createActivitynext", {
-        url: "/createActivitynext",
-        views: {
-            menuContent: {
-                templateUrl: "createActivitynext.html",
-                controller: "SettingsCtrl"
-            }
-		}
-		});
+	});
 		
 		
 		
-		
-    $urlRouterProvider.otherwise("/menu/createActivity");
+ 	//todo comment code	for app run with static data
+    //$urlRouterProvider.otherwise("/menu/createActivity");
+    
+    
+    	$urlRouterProvider.otherwise("/menu/createActivity");
+   
 }]);
 "use strict";
 
@@ -2744,7 +2813,7 @@ app.config(["$provide", function ($provide) {
 }]);
 "use strict";
 
-angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCordova", "ionic.contrib.ui.tinderCards"]).controller("SignInCtrl", ["$scope", "$log", "$rootScope", "$state", "$http", "$timeout", "$cordovaFacebook", "$q", "$ionicPopup", "$ionicModal", "$ionicLoading", "$ionicHistory", "AppService", "AppUtil", "SocialAuth", "linkedInId", "linkedInSecret", function ($scope, $log, $rootScope, $state, $http, $timeout, $cordovaFacebook, $q, $ionicPopup, $ionicModal, $ionicLoading, $ionicHistory, AppService, AppUtil, SocialAuth, linkedInId, linkedInSecret) {
+angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCordova", "ionic.contrib.ui.tinderCards","ionic", "ionic-timepicker","ionic-datepicker"]).controller("SignInCtrl", ["$scope", "$log", "$rootScope", "$state", "$http", "$timeout", "$cordovaFacebook", "$q", "$ionicPopup", "$ionicModal", "$ionicLoading", "$ionicHistory", "AppService", "AppUtil", "SocialAuth", "linkedInId", "linkedInSecret", function ($scope, $log, $rootScope, $state, $http, $timeout, $cordovaFacebook, $q, $ionicPopup, $ionicModal, $ionicLoading, $ionicHistory, AppService, AppUtil, SocialAuth, linkedInId, linkedInSecret) {
 
     /**
      * The SignInCtrl handle the flow for registering and authenticating a user. There are currently three entry points:
@@ -2804,7 +2873,10 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
     };
 
     $scope.emailRegister = function () {
-        if (validateEmailPassword()) return;
+        $state.go("menu.home");
+        localStorage.setItem('validJoinUser',true);
+        // comment code for future
+        /*if (validateEmailPassword()) return;
         setLoggingInStyles();
         AppService.signUp($scope.credentials.email, $scope.credentials.password).then(function (result) {
             $log.log("user signed up success");
@@ -2813,11 +2885,14 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
             resetStyles();
             $log.error("user signed up error " + JSON.stringify(error));
             AppUtil.toastSimple(error.message);
-        });
+        });*/
     };
 
     $scope.emailLogin = function () {
-        if (validateEmailPassword()) return;
+        $state.go("menu.home");
+        localStorage.setItem('validJoinUser',true);
+        // comment code for future
+        /*if (validateEmailPassword()) return;
         setLoggingInStyles();
         AppService.logIn($scope.credentials.email, $scope.credentials.password).then(function (result) {
             $log.log("user login success");
@@ -2826,7 +2901,7 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
             resetStyles();
             $log.error("user login error " + JSON.stringify(error));
             AppUtil.toastSimple("Login error");
-        });
+        });*/
     };
 	$scope.nextActivity = function () {
 		
@@ -2883,6 +2958,7 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
 
     $scope.facebookLogin = function () {
         setLoggingInStyles();
+        debugger;
         $scope.status = "LOGGING_IN_TO_FB";
 
         connectToFacebook().then(function (result) {
@@ -3007,6 +3083,7 @@ angular.module("controllers", ["service.app", "ngMaterial", "ngAnimate", "ngCord
                 $log.log("$cordovaFacebook.login");
                 $cordovaFacebook.login(["public_profile", "email", "user_birthday", "user_photos", "user_friends", "user_likes"]).then(function (loginResult) {
                     if (loginResult.status === "connected") {
+                        
                         $log.log("setting $rootScope.facebookConnected");
                         $rootScope.facebookConnected = true;
                         $rootScope.fbAccessToken = loginResult.authResponse.accessToken;
@@ -3078,6 +3155,22 @@ angular.module("controllers").controller("CardsCtrl", ["$log", "$scope", "$state
     // TODO rename this to profiles as its IProfile and not IMatch objects
     $scope.matches = null;
 
+
+	// dummy data for home carousel
+	$scope.homeCarouselData=new Object({"data":[{"activityName":"Activity 1","image":"./img/chat_1.png","activityDistance":7,"activityDateTime":"25-05-2015"},{"activityName":"Activity 2","image":"./img/slider_me_my.jpg","activityDistance":11,"activityDateTime":"11-05-2015"},{"activityName":"Activity 3","image":"./img/cr_invite_img.jpg","activityDistance":1,"activityDateTime":"25-09-2015"},{"activityName":"Activity 4","image":"./img/fire-small.png","activityDistance":3,"activityDateTime":"15-05-2015"},{"activityName":"Activity 5","image":"./img/fire.png","activityDistance":15,"activityDateTime":"29-08-2015"},{"activityName":"Activity 6","image":"./img/join_activity_1.png","activityDistance":55,"activityDateTime":"10-04-2015"},{"activityName":"Activity 7","image":"./img/chat_1.png","activityDistance":17,"activityDateTime":"12-07-2015"},{"activityName":"Activity 8","image":"./img/fire.png","activityDistance":71,"activityDateTime":"25-08-2015"},{"activityName":"Activity 9","image":"./img/cr_invite_img.jpg","activityDistance":9,"activityDateTime":"25-09-2015"},{"activityName":"Activity 10","image":"./img/fire.png","activityDistance":12,"activityDateTime":"15-05-2015"}]});
+	
+	
+    
+    
+	$scope.onAddlikentnTap = function (datas) {
+        console.log(datas);
+        alert('onAddlikentnTap - '+datas.activityName);
+    };
+    $scope.onDislikentnTap = function (datas) {
+        console.log(datas);
+        alert('onDislikentnTap - '+datas.activityName);
+    };
+	
     var profile = $scope.profile = AppService.getProfile();
     //todo
     //$scope.profilePhoto = profile.photoUrl;
@@ -3209,7 +3302,369 @@ angular.module("controllers").controller("CardsCtrl", ["$log", "$scope", "$state
         AppService.processMatch(match, true);
         if ($scope.matches.length == 0) {}
     };
-}]).controller("CardInfoCtrl", ["$log", "$scope", "$cordovaFacebook", "$ionicHistory", "$ionicActionSheet", "$ionicLoading", "$mdToast", "$translate", "AppService", function ($log, $scope, $cordovaFacebook, $ionicHistory, $ionicActionSheet, $ionicLoading, $mdToast, $translate, AppService) {
+}])
+
+
+
+.controller("createActivity_Select_Ctrl", ["$scope", "$log", "$rootScope", "$state", "$http", "$timeout", "$cordovaFacebook", "$q", "$ionicPopup", "$ionicModal", "$ionicLoading", "$ionicHistory", "AppService", "AppUtil", "SocialAuth", "linkedInId", "linkedInSecret", function ($scope, $log, $rootScope, $state, $http, $timeout, $cordovaFacebook, $q, $ionicPopup, $ionicModal, $ionicLoading, $ionicHistory, AppService, AppUtil, SocialAuth, linkedInId, linkedInSecret) {
+	
+	//create new activity object
+	$rootScope.newCreateActivityDataObj=new Object({
+		activityName:'',
+		image:'',
+		activityDateTime:'',
+		activityInfo:'',
+		latitude:'',
+		longitude:'',
+		address:'',
+		discoverable:true,
+		autoJoin:true,
+		Join_guys:true,
+		Join_girl:true,
+		minAge:18,
+		maxAge:30,
+	});
+	
+	
+	$scope.ActivityData=new Object({"data":[{"title":"1","img_url":"./img/add.png"},{"title":"2","img_url":"./img/camera_img.png"},{"title":"3","img_url":"./img/chat_1.png"},{"title":"4","img_url":"./img/fire-small.png"},{"title":"5","img_url":"./img/fire.png"},{"title":"6","img_url":"./img/help_icon.png"},{"title":"7","img_url":"./img/lisa_chat_icon.png"}]});
+    $scope.ActivityData=$scope.ActivityData.data;
+    
+    $scope.onItemtapActivityData = function (activity_Data) {
+		$rootScope.selectPhotoData=activity_Data;
+		$rootScope.newCreateActivityDataObj.image=activity_Data.img_url;
+		$state.go("menu.selectPhoto");
+	};
+
+	 $scope.makephoto_createActivity = function () {
+		navigator.camera.getPicture(function(imageURI){
+			$rootScope.selectPhotoData=new Object({img_url:imageURI});
+			$rootScope.newCreateActivityDataObj.image=imageURI;
+			$state.go("menu.selectPhoto");
+			console.log(imageURI);
+		},
+		function(error){
+		
+			console.log(error);
+		},{
+			quality: 50,
+			destinationType: Camera.DestinationType.FILE_URI,
+			sourceType : Camera.PictureSourceType.CAMERA,			
+			saveToPhotoAlbum: false
+		});
+		//$state.go("menu.selectPhoto");
+	
+	
+	 };
+ 
+	 $scope.selectphoto_createActivity = function () {
+	
+		navigator.camera.getPicture(function(imageURI){
+			$rootScope.selectPhotoData=new Object({img_url:imageURI});
+			$rootScope.newCreateActivityDataObj.image=imageURI;
+			$state.go("menu.selectPhoto");
+			console.log(imageURI);
+		},
+		function(error){
+		
+			console.log(error);
+		},{
+			quality: 50,
+			destinationType: Camera.DestinationType.FILE_URI,
+			sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+			//allowEdit : true,
+			saveToPhotoAlbum: false
+
+		});
+		console.log('SettingsCtrl-makephoto_createActivity');
+		//$state.go("menu.selectPhoto");
+	 };
+	 
+    
+}])
+
+.controller("C_A_selectPhoto_Ctrl", ["$scope", "$log", "$rootScope", "$state", "$http", "$timeout", "$cordovaFacebook", "$q", "$ionicPopup", "$ionicModal", "$ionicLoading", "$ionicHistory", "AppService", "AppUtil", "SocialAuth", "linkedInId", "linkedInSecret", function ($scope, $log, $rootScope, $state, $http, $timeout, $cordovaFacebook, $q, $ionicPopup, $ionicModal, $ionicLoading, $ionicHistory, AppService, AppUtil, SocialAuth, linkedInId, linkedInSecret) {
+    
+    if($rootScope.selectPhotoData){
+		$scope.selectPhotoData=$rootScope.selectPhotoData;
+	}
+	
+	$scope.onReselect_Photo_createActivity = function () {
+			navigator.camera.getPicture(function(imageURI){
+				$scope.selectPhotoData=new Object({img_url:imageURI});
+				$rootScope.selectPhotoData=new Object({img_url:imageURI});
+				$rootScope.newCreateActivityDataObj.image=imageURI;
+				console.log(imageURI);
+			},
+			function(error){			
+				console.log(error);
+			},{
+				quality: 50,
+				destinationType: Camera.DestinationType.FILE_URI,
+				sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+				saveToPhotoAlbum: false
+  
+			});
+     		//$state.go("menu.createActivitySelect");
+     };
+     
+     $scope.onRetake_Photo_createActivity = function () {
+			
+			navigator.camera.getPicture(function(imageURI){
+				$scope.selectPhotoData=new Object({img_url:imageURI});
+				$rootScope.selectPhotoData=new Object({img_url:imageURI});
+				$rootScope.newCreateActivityDataObj.image=imageURI;
+				console.log(imageURI);
+			},
+			function(error){
+			
+				console.log(error);
+			},{
+				quality: 50,
+				destinationType: Camera.DestinationType.FILE_URI,
+				sourceType : Camera.PictureSourceType.CAMERA,				
+				saveToPhotoAlbum: false
+  
+			});
+     		//$state.go("menu.createActivitySelect");
+     };
+     
+     $scope.onSwipeLeft_createActivity = function () {
+     	console.log('SettingsCtrl-onSwipeLeft_createActivity');
+     	$state.go("menu.createActivitynext");
+     };
+     
+   
+    
+}])
+
+.controller("createActivitynextCtrl",
+				["$scope", "$log", "$rootScope", "$state", 
+				"$http", "$timeout", "$cordovaFacebook", "$q", 
+				"$ionicPopup", "$ionicModal", "$ionicLoading", "$ionicHistory", 
+				"AppService", "AppUtil", "SocialAuth", "linkedInId", 
+				"linkedInSecret","$ionicPopover",
+				 function ($scope, $log, $rootScope, $state, $http,
+				  $timeout, $cordovaFacebook, $q, $ionicPopup, $ionicModal, 
+				  $ionicLoading, $ionicHistory, AppService, AppUtil, SocialAuth,
+				   linkedInId, linkedInSecret,$ionicPopover) {
+    
+    
+   
+    if($rootScope.newCreateActivityDataObj){
+    	$scope.newActivityDataObj=$rootScope.newCreateActivityDataObj;
+    	angular.asdf=$scope.newActivityDataObj;
+    }
+    
+    if($rootScope.selectPhotoData){
+		$scope.selectPhotoData=$rootScope.selectPhotoData;
+	}
+	
+	$scope.publish_activity = function () {    	
+    	console.log($rootScope.newCreateActivityDataObj);
+    	//$state.go('signin');
+    };
+    
+    
+    $scope.onCreateActivityAddInfo = function () {
+		var addInfoPopOver = '<ion-modal-view>'+
+				  '<ion-header-bar class="bar-positive bar bar-header disable-user-behavior">'+
+						'<h1 class="title"><span><img src="./img/header_app_icon.png" class="headertoolbarimage"></span><span>Add Information</span></h1>'+
+				  '</ion-header-bar>'+
+				  
+				  '<ion-content  scroll="false">'+
+				   		
+				   		'<div class="main_bg">'+
+							
+							'<div class="row">'+					 	 
+					   			'<textarea ng-model="newActivityDataObj.activityInfo" name="aboutCA" rows="10" placeholder="Add Information about create Activity" style="width:100%;"></textarea>'+
+							'</div>'+
+					  		
+					  		'<div class="row">'+
+							  '<div class="col"><button class="button button-block saveInfoBtn_cls" ng-click="getInfoAboutCA()">Save</button></div>'+
+							  '<div class="col"><button class="button button-block cancelInfoBtn_cls" ng-click="hideAddInfoPopOver()">Cancel</button></div>'+
+							'</div>'+
+					  	'</div>'+
+					  						
+				 ' </ion-content>'+
+				'</ion-modal-view>';
+
+		  $scope.addInfoPopOver = $ionicPopover.fromTemplate(addInfoPopOver, {
+			scope: $scope
+		  });
+		  $scope.addInfoPopOver.show();
+		
+	 };
+	  $scope.getInfoAboutCA = function() {
+		$rootScope.newCreateActivityDataObj.activityInfo=$scope.newActivityDataObj.activityInfo;
+		$scope.addInfoPopOver.hide();		
+	 };
+	 $scope.hideAddInfoPopOver = function() {
+		$scope.addInfoPopOver.hide();
+	 };
+	 
+    $scope.onSetLocationonMap = function () {
+		console.log('createActivitynextCtrl-onSetLocationonMap');
+		$state.go("menu.mapLocation");
+	 };
+	 
+	$scope.onCreateActivitySettings = function () {
+		//alert('heloo');
+		$state.go("menu.discovery");
+	 }; 
+	 
+	 
+	 var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
+	 var monthList = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+	 
+    
+	 $scope.datepickerObject = {
+		  titleLabel: 'Select Date',  //Optional
+		  todayLabel: 'Today',  //Optional
+		  closeLabel: 'Close',  //Optional
+		  setLabel: 'Set',  //Optional
+		  setButtonType : 'button-assertive',  //Optional
+		  todayButtonType : 'button-assertive',  //Optional
+		  closeButtonType : 'button-assertive',  //Optional
+		  inputDate: new Date(),    //Optional
+		  mondayFirst: true,    //Optional
+		  
+		  weekDaysList: weekDaysList,   //Optional
+		  monthList: monthList, //Optional
+		  templateType: 'modal', //Optional
+		  showTodayButton: 'true', //Optional
+		  modalHeaderColor: 'bar-positive', //Optional
+		  modalFooterColor: 'bar-positive footerDatePicker', //Optional
+		  callback: function (val) {    //Mandatory
+			if (typeof(val) === 'undefined') {
+				console.log('No date selected');
+			} else {
+				$scope.datepickerObject.inputDate = val;
+				console.log('Selected date is : ', val)
+			}
+		  }
+	};
+    
+    
+	 $scope.timePickerObject = {
+	  inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
+	  step: 1,  //Optional
+	  format: 12,  //Optional
+	  titleLabel: 'Set Time',  //Optional
+	  setLabel: 'Set',  //Optional
+	  closeLabel: 'Close',  //Optional
+	  setButtonType: 'button-positive',  //Optional
+	  closeButtonType: 'button-stable',  //Optional
+	  callback: function (val) {    //Mandatory
+		if (typeof (val) === 'undefined') {
+    		console.log('Time not selected');
+  		} else {
+		    $scope.timePickerObject.inputEpochTime = val;
+		    var selectedTime = new Date(val * 1000);
+		    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+		}
+	  }
+	};
+	
+}])
+
+.controller("LocationSetupCtrl", ["$scope","$rootScope", "$translate", "AppService", "AppUtil", "$ionicPopup","$state", function ($scope,$rootScope, $translate, AppService, AppUtil, $ionicPopup,$state) {
+	
+	$scope.mapActivityDataObj={};
+	if($rootScope.newCreateActivityDataObj){
+    	$scope.mapActivityDataObj=$rootScope.newCreateActivityDataObj;
+    }
+    
+    var translations;
+    $translate(["SETTINGS_SAVE_ERROR", "GPS_ERROR", "SET_MAP_LOCATION"]).then(function (translationsResult) {
+        translations = translationsResult;
+    });
+
+    // New York
+    var latLng = new google.maps.LatLng(40.73, -73.99);
+
+    var mapOptions = {
+        center: latLng,
+        zoom: 11,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        disableDoubleClickZoom: true
+    };
+
+    var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
+    $scope.map = map;
+    map.setCenter(latLng);
+	var geocoder = new google.maps.Geocoder;
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: "My Location",
+        draggable: true
+    });
+	$scope.mapActivityDataObj.address='';
+	
+	
+	 navigator.geolocation.getCurrentPosition(function(pos) {
+        latLng=new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+        $scope.map.setCenter(latLng);
+        marker.setPosition(latLng);
+        
+        $scope.getAddressFromLatlong();
+        
+      }, function(error) {
+           
+           $ionicPopup.alert({
+				title: translations.GPS_ERROR,
+				template: translations.SET_MAP_LOCATION
+			});
+			$scope.getAddressFromLatlong();
+      });
+      
+      
+    google.maps.event.addListener(map, "click", function (event) {
+        latLng=event.latLng;
+        marker.setPosition(latLng);
+        $scope.getAddressFromLatlong();
+    });
+
+    $scope.setLocation = function () {
+        var pos = marker.getPosition();
+        
+        $rootScope.newCreateActivityDataObj.latitude=pos.lat();
+		$rootScope.newCreateActivityDataObj.longitude= pos.lng();		
+		$rootScope.newCreateActivityDataObj.address=$scope.mapActivityDataObj.address;
+		
+        /*AppUtil.blockingCall(AppService.saveProfile({ gps: false, location: { latitude: pos.lat(), longitude: pos.lng() } }), function () {
+            return AppService.goToNextLoginState();
+        }, "SETTINGS_SAVE_ERROR");*/
+        $state.go("menu.createActivitynext");
+    };
+
+    $scope.cancel = function () {
+        return AppService.logout();
+    };
+    
+    $scope.getAddressFromLatlong = function () {
+		geocoder.geocode({'location': latLng}, function(results, status) {
+			if (status === google.maps.GeocoderStatus.OK) {
+				if (results) {
+					console.log(results[0].formatted_address);
+					$scope.mapActivityDataObj.address=results[0].formatted_address;
+			  	}else {
+					console.log('No results found');
+			  	}
+			}
+		});
+    };
+	
+    /*$scope.$on("$ionicView.afterEnter", function (event) {
+        $ionicPopup.alert({
+            title: translations.GPS_ERROR,
+            template: translations.SET_MAP_LOCATION
+        });
+    });*/
+}])
+.controller("CardInfoCtrl", ["$log", "$scope", "$cordovaFacebook", "$ionicHistory", "$ionicActionSheet", "$ionicLoading", "$mdToast", "$translate", "AppService", function ($log, $scope, $cordovaFacebook, $ionicHistory, $ionicActionSheet, $ionicLoading, $mdToast, $translate, AppService) {
 
     //$cordovaFacebook.api()
     //{user-id}?fields=context.fields%28mutual_friends%29
@@ -3387,70 +3842,6 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
     $scope.logout = function () {
         return AppService.logout();
     };
-}]).controller("LocationSetupCtrl", ["$scope", "$translate", "AppService", "AppUtil", "$ionicPopup","$state", function ($scope, $translate, AppService, AppUtil, $ionicPopup,$state) {
-
-    var translations;
-    $translate(["SETTINGS_SAVE_ERROR", "GPS_ERROR", "SET_MAP_LOCATION"]).then(function (translationsResult) {
-        translations = translationsResult;
-    });
-
-    // New York
-    var latLng = new google.maps.LatLng(40.73, -73.99);
-
-    var mapOptions = {
-        center: latLng,
-        zoom: 11,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        streetViewControl: false,
-        disableDoubleClickZoom: true
-    };
-
-    var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
-    $scope.map = map;
-    map.setCenter(latLng);
-
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: "My Location",
-        draggable: true
-    });
-	 
-	 
-	 navigator.geolocation.getCurrentPosition(function(pos) {
-        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        marker.setPosition(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      }, function(error) {
-           $ionicPopup.alert({
-				title: translations.GPS_ERROR,
-				template: translations.SET_MAP_LOCATION
-			});
-      });
-      
-      
-    google.maps.event.addListener(map, "click", function (event) {
-        marker.setPosition(event.latLng);
-    });
-
-    $scope.setLocation = function () {
-        var pos = marker.getPosition();
-        /*AppUtil.blockingCall(AppService.saveProfile({ gps: false, location: { latitude: pos.lat(), longitude: pos.lng() } }), function () {
-            return AppService.goToNextLoginState();
-        }, "SETTINGS_SAVE_ERROR");*/
-        $state.go("menu.createActivitynext");
-    };
-
-    $scope.cancel = function () {
-        return AppService.logout();
-    };
-
-    /*$scope.$on("$ionicView.afterEnter", function (event) {
-        $ionicPopup.alert({
-            title: translations.GPS_ERROR,
-            template: translations.SET_MAP_LOCATION
-        });
-    });*/
 }]).controller("TermsOfUseCtrl", ["$scope", "AppService", "AppUtil", function ($scope, AppService, AppUtil) {
 
     // Required for Apple store submission when there is user generated content.
@@ -3608,33 +3999,15 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
     $scope.cancel = function () {
         $scope.profile = AppService.getProfile($scope).clone();
     };
-}]).controller("SettingsCtrl", ["$log", "$scope", "$rootScope", "$state", "$translate", "$mdToast", "AppService", "$ionicLoading", "$ionicActionSheet", "$cordovaFacebook", function ($log, $scope, $rootScope, $state, $translate, $mdToast, AppService, $ionicLoading, $ionicActionSheet, $cordovaFacebook) {
+}]).controller("SettingsCtrl", ["$log", "$scope", "$rootScope", "$state", "$translate", "$mdToast", "AppService", "$ionicLoading", "$ionicActionSheet", "$cordovaFacebook","$ionicModal","$ionicPopover", function ($log, $scope, $rootScope, $state, $translate, $mdToast, AppService, $ionicLoading, $ionicActionSheet, $cordovaFacebook,$ionicModal,$ionicPopover) {
 	
-	//check select photo root scope data 
-	if($rootScope.selectPhotoData){
-		$scope.selectPhotoData=$rootScope.selectPhotoData;
-	}
 	
     var translations;
     $translate(["SETTINGS_SAVE_ERROR", "DELETE", "DELETE_ACCOUNT", "CANCEL"]).then(function (translationsResult) {
         translations = translationsResult;
     });
 
-   // $scope.profile = AppService.getProfile().clone();
-	
-	
-	
-	//static data for create Activity list 
-	$scope.ActivityData=new Object({"data":[{"title":"1","img_url":"../img/add.png"},{"title":"2","img_url":"../img/camera_img.png"},{"title":"3","img_url":"../img/chat_1.png"},{"title":"4","img_url":"../img/fire-small.png"},{"title":"5","img_url":"../img/fire.png"},{"title":"6","img_url":"../img/help_icon.png"},{"title":"7","img_url":"../img/lisa_chat_icon.png"}]});
-    $scope.ActivityData=$scope.ActivityData.data;
-   	
-   	
-   	
-   	
-   	$scope.onItemtapActivityData = function (activity_Data) {
-   		$rootScope.selectPhotoData=activity_Data;
-   		$state.go("menu.selectPhoto");
-   	};
+   
    	
     $scope.save = function () {
         $ionicLoading.show({ templateUrl: "loading.html" });
@@ -3646,40 +4019,6 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
         }).always(function () {
             $ionicLoading.hide();
         });
-    };
-    //krishna
-     $scope.selectphoto_createActivity = function () {
-     	$state.go("menu.selectPhoto");
-     };
-     
-     $scope.makephoto_createActivity = function () {
-     	console.log('SettingsCtrl-makephoto_createActivity');
-     	$state.go("menu.selectPhoto");
-     };
-     
-     $scope.onReselect_Photo_createActivity = function () {
-     	console.log('SettingsCtrl-onReselect_Photo_createActivity');
-     	$state.go("menu.createActivitySelect");
-     };
-     
-     $scope.onRetake_Photo_createActivity = function () {
-     	console.log('SettingsCtrl-onRetake_Photo_createActivity');
-     	$state.go("menu.createActivitySelect");
-     };
-     $scope.onSwipeLeft_createActivity = function () {
-     	console.log('SettingsCtrl-onSwipeLeft_createActivity');
-     	$state.go("menu.createActivitynext");
-     };
-     
-     $scope.onSetLocationonMap = function () {
-     	console.log('SettingsCtrl-onSetLocationonMap');
-     	$state.go("menu.mapLocation");
-     };
-	
-	
-	 $scope.publish_activity = function () {
-    	angular.aaaaa=$scope;
-    	$state.go('signin');
     };
 	
     $scope.cancel = function () {
@@ -3820,17 +4159,86 @@ angular.module("controllers").controller("EmailVerificationCtrl", ["$scope", "Ap
 // send back to main page?
 "use strict";
 
-angular.module("controllers").controller("ChatsCtrl", ["$scope", "$log", "AppService", function ($scope, $log, AppService) {
-
+angular.module("controllers").controller("ChatsCtrl", ["$scope", "$log", "AppService","$ionicScrollDelegate","$interval","$timeout", function ($scope, $log, AppService,$ionicScrollDelegate,$interval,$timeout) {
+	
+	
+	var messageCheckTimer;
+    var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll'); 
+   	
+   	
+   	
+    
+	$scope.user={
+		id:"101",
+		name:'test user 1',
+		myDate:new Date()
+	};
+	
+	$scope.inputText = {
+      message: ''
+    };
+    
+	$scope.messages=new Object([{"userId":"101","date":"2014-04-27T20:02:39.082Z","username":"Test user 1","img_url":"./img/fire-small.png","message":"Hello test message 123 for chat modul Join.Hello test message 123 for chat modul Join.Hello test message 123 for chat modul Join.Hello test message 123 for chat modul Join.Hello test message 123 for chat modul Join.Hello test message 123 for chat modul Join."},{"userId":"102","date":"2014-04-26T20:02:39.082Z","username":"Test user 2","img_url":"./img/fire.png","message":"Hello test message ABC for chat modul Join.Hello test message ABC for chat modul Join.Hello test message ABC for chat modul Join.Hello test message ABC for chat modul Join."}]);
+	
+	
+	$scope.showChaterInfo = function() {
+		if($scope.showChatterInfo){
+			$scope.showChatterInfo=false;
+		}else{
+			$scope.showChatterInfo=true;
+		}
+      	
+    };
+    
+    
+	$scope.onSendMessage = function() {
+      	
+      	if($scope.inputText.message){
+      		$scope.messages.push({
+				"userId": $scope.user.id,
+				"date": new Date(),
+				"username": $scope.user.name,
+				"img_url": "./img/fire-small.png",
+				"message":$scope.inputText.message
+			});
+			$timeout(function() {
+			  viewScroll.scrollBottom(true);
+			}, 0);
+			$scope.inputText.message='';
+      	}
+      	
+      	
+    };
+	
+	
 	$scope.$on("$ionicView.beforeEnter", function () {
+		console.log('$ionicView.beforeEnter');
 		$scope.matches = AppService.getMutualMatches();
 		AppService.resetBadge();
 	});
+	
+	
+	$scope.$on('$ionicView.enter', function() {
+      console.log('$ionicView.enter');
+      messageCheckTimer = $interval(function() {       
+        console.log('messageCheckTimer');
+      }, 1000);
+    });
+    
+    
+	$scope.$on('$ionicView.leave', function() {
+      console.log('leaving UserMessages view, destroying interval');
+      if (angular.isDefined(messageCheckTimer)) {
+        $interval.cancel(messageCheckTimer);
+        messageCheckTimer = undefined;
+      }
+    });
 
 	$scope.$on("matchRemoved", function (event, matchId) {
 		$log.log("on ChatsCtrl removeMatch");
 		$scope.$apply();
 	});
+	
 }]).controller("ChatCtrl", ["$scope", "$log", "$timeout", "$interval", "$translate", "$ionicScrollDelegate", "$state", "$stateParams", "$ionicHistory", "$ionicNavBarDelegate", "$ionicActionSheet", "$ionicPopup", "$ionicLoading", "$mdToast", "AppService", "AppUtil", function ($scope, $log, $timeout, $interval, $translate, $ionicScrollDelegate, $state, $stateParams, $ionicHistory, $ionicNavBarDelegate, $ionicActionSheet, $ionicPopup, $ionicLoading, $mdToast, AppService, AppUtil) {
 
 	// Modified from http://forum.ionicframework.com/t/ionic-elastichat-chat-demo-w-auto-resizing-textarea/13562
@@ -3864,6 +4272,8 @@ angular.module("controllers").controller("ChatsCtrl", ["$scope", "$log", "AppSer
 		$ionicLoading.show({ templateUrl: "loading.html", noBackdrop: true });
 		AppService.getActiveChat($stateParams.matchId).then(function (result) {
 			$scope.messages = result;
+			
+			
 			return AppService.getProfileByMatchId($stateParams.matchId);
 		}).then(function (result) {
 			return $scope.matchProfile = result;

@@ -177,9 +177,11 @@ td-card img {
     overflow: visible !important;
 }
 
-.bar-footer textarea {
+
+.footer_bg textarea {
 	resize: none;
-	height: 25px;
+	height: 20px;
+	overflow: hidden;
 }
 
 button.ion-android-send {
@@ -274,14 +276,14 @@ img.profile-pic {
 }
 
 .chat-bubble.right {
-    background-color: #158ffe;
+    background-color: #018E75;
     color: #fff;
     float: right;
-    margin-right: 10px;
+    margin-right: 55px;
 }
 
 .chat-bubble.right:before {
-	background-color: #158ffe;
+	background-color: #018E75;
 	right: 10px;
 	-webkit-transform: rotate(118deg) skew(-5deg);
 }
@@ -402,6 +404,7 @@ a.autolinker {
     float: left;
     width: 100%;
     min-height: 100%;
+    height: 100%;
 }
 
 .button-bar2 {
@@ -595,7 +598,7 @@ a.autolinker {
 
 .sky_bg {
     background: #f3fcfa;
-    border-bottom: 20px solid #fb4d2b;
+    border-bottom: 5px solid #fb4d2b;
 }
 
 .gre_bg {
@@ -841,7 +844,7 @@ a.item {
 }
 
 .profile_bg_1 {
-    background: rgba(0, 0, 0, 0) url("../img/slider_me_my.jpg") no-repeat scroll left top;
+    background: rgba(0, 0, 0, 0) url("./img/slider_me_my.jpg") no-repeat scroll left top;
     float: left;
     height: 440px;
     width: 100%;
@@ -922,42 +925,10 @@ a.item {
     width: 79%;
 }
 
-.title7 {
-    color: rgb(255, 255, 255);
-    float: right !important;
-    font-size: 17px;
-    line-height: 44px;
-    margin: 10px 10px 0;
-    text-align: center;
-    width: 50%;
-}
 
-.title8 {
-    color: rgb(255, 255, 255);
-    float: right !important;
-    font-size: 17px;
-    line-height: 44px;
-    margin: 0px 10px 0;
-    text-align: right;
-    width: 50%;
-}
-
-.title9 {
-    color: rgb(255, 255, 255);
-    float: right !important;
-    font-size: 17px;
-    line-height: 44px;
-    margin: 0px 10px 0;
-    text-align: right;
-    width: 50%;
-}
-
-.share_icon {
-    font-size: 25px !important;
-}
 
 .chat_bg {
-    background: rgba(0, 0, 0, 0) url("../img/chat_bg.jpg") no-repeat scroll left top / 100% auto;
+    background: rgba(0, 0, 0, 0) url("./img/chat_bg.jpg") no-repeat scroll left top / 100% auto;
     float: left;
     height: 229px;
     margin-top: 104px;
@@ -971,14 +942,11 @@ a.item {
 	border-bottom: 1px dashed #fff;
 }
 
-.right_arrow {
-    background-color: rgb(29, 31, 34);
+.right_arrow_chat {
+    background-color: transparent;
     color: rgb(255, 255, 255);
-    font-size: 14px;
-    margin: 14px 40px 40px;
-    padding: 115% 0;
+    margin: 0px 10px;
     text-align: center;
-    width: 32%;
     display: block;
 }
 
@@ -1040,7 +1008,15 @@ a.item {
 
 .footer_bg {
     background-color: #018e75 !important;
-    min-height: 60px;
+    min-height: 58px;
+    height: 58px;
+}
+
+.upload_chat_photoCls{
+	width: 46px;
+    height: 46px;
+    margin-right: 10px;
+    background-size: 100% 100%;
 }
 
 .message_fotter {
@@ -1067,10 +1043,10 @@ a.item {
     border-radius: 50%;
     color: rgb(255, 255, 255);
     font-size: 22px !important;
-    height: 42px;
+    height: 43px;
     margin-left: 9px;
     text-align: center !important;
-    width: 7%;
+    width: 43px;
 }
 
 .camera_txt {
@@ -1092,7 +1068,7 @@ a.item {
 }
 .help_indicator{
 	width: 30px;
-    background-image: url("../img/help_icon.png");
+    background-image: url("./img/help_icon.png");
     height: 28px;
     background-size: 100% 100%;
     background-color: transparent;
@@ -1105,7 +1081,7 @@ a.item {
 }
 .select_photo_icon{
 	width: 100px;
-    background-image: url("../img/select_photo_icon.png");
+    background-image: url("./img/select_photo_icon.png");
     height: 100px;
     background-size: 100% 100%;
     background-color: transparent;
@@ -1114,7 +1090,7 @@ a.item {
 }
 .make_photo_icon{
 	width: 100px;
-    background-image: url("../img/make_photo_icon.png");
+    background-image: url("./img/make_photo_icon.png");
     height: 100px;
     background-size: 100% 100%;
     background-color: transparent;
@@ -1130,8 +1106,7 @@ a.item {
 	font-weight: bold;
 }
 
-.capture_image {
-    background: rgba(0, 0, 0, 0) url("./img/cr_invite_img.jpg") no-repeat scroll left top;
+.capture_image {    
     float: left;
     height: 510px;
     margin-top: 50px;
@@ -1141,22 +1116,22 @@ a.item {
 
 
 .retake_Photo{
-	width: 75px;
-    background-image: url("../img/camera_img.png");
-    height: 75px;
+	width: 65px;
+    background-image: url("./img/camera_img.png");
+    height: 65px;
     background-size: 100% 100%;
     background-color: transparent;
-    margin-top: 15px;
+    margin-top: 10px;
     border: none;
     vertical-align: middle;
 }
 .Reselect_Photo{
-	width: 75px;
-    background-image: url("../img/select_photo_icon.png");
-    height: 75px;
+	width: 65px;
+    background-image: url("./img/select_photo_icon.png");
+    height: 65px;
     background-size: 100% 100%;
     background-color: transparent;
-    margin-top: 15px;
+    margin-top: 10px;
     border: none;
     vertical-align: middle;
 }
@@ -1170,14 +1145,14 @@ a.item {
 }
 
 .grey_bg {
-    background: #5F6967;
-    border-bottom: 20px solid #173E18;
+    background: #ADA69D;
+    border-bottom: 30px solid #2A7465;
 }
 
 .vid_play_icon_photo{
-	width: 75px;
-    background-image: url("../img/vid_play_icon.png");
-    height: 75px;
+	width: 65px;
+    background-image: url("./img/vid_play_icon.png");
+    height: 65px;
     background-size: 100% 100%;
     background-color: transparent;
     margin-top: 15px;
@@ -1209,7 +1184,138 @@ a.item {
 .ca_menuList{
 	margin: 0 auto;
 	color: #fff;
-	padding: 10px;
+	padding: 11px;
 	width: 233px;
 	text-align: left;
 }
+
+.activity_profile_image {
+    float: left;
+    height: 360px;
+    margin-top: 50px;
+    width: 100%;
+    background-size: 100%;
+}
+
+.titletopStyle{
+	right: 0px !important;
+	left: 0px !important;
+	text-align: center !important;
+}
+
+.responsiveWidth_height{
+	width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.responsive_con_class{
+     display: -webkit-flex;
+     -webkit-flex-direction: column;
+     height: 100%;
+}
+.responsive_con_class > .responsive_con_rowCls{
+     -webkit-flex: 1;
+}
+
+
+
+
+.profile_bg_image{
+  background: rgba(0, 0, 0, 0) url("./img/cr_invite_img.jpg") no-repeat scroll left top;
+  float: left;
+  height: auto;
+  width: 100%;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+}
+
+
+
+.overTxt_msg_profilepic {
+	background: rgba(0, 0, 0, .5);
+	color: #ffffff;
+  	float: left;
+  	font-size: 17px;
+ 	padding: 15px 0;
+  	text-align: center;
+  	width: 100%;
+  	margin-top: 33%;  
+	border-top:5px solid #000;
+  	border-bottom:5px solid #000;
+}
+.saveInfoBtn_cls{
+	background: #018e75 !important;
+	color:#ffffff !important;
+	border-radius: 7px !important;
+	border: 4px solid #53a38f !important;
+	width:80% !important;
+	margin:10px auto !important;
+}
+.cancelInfoBtn_cls{
+	background: #fff !important;
+	color:#000000 !important;
+	border-radius: 7px !important;
+	border: 4px solid #fff !important;
+	width:80% !important;
+	margin:10px auto !important;
+}
+
+.chatActivity_name {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    text-align: left;
+    
+}
+
+.chatActivity_Img_cls {
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    text-align: center;
+
+}
+
+.chatActivity_name_time {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    text-align: right;
+    
+}
+
+.activitynameCls{
+	font-weight: bold;
+	display: inline-block !important;
+	background-color: transparent !important;
+	color: #ffffff !important;
+}
+
+
+
+//add mixin class Start
+
+
+
+
+
+//add mixin class - End
+
+
+
+
+
+
